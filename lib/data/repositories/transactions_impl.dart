@@ -40,7 +40,7 @@ final class TransactionsRepositoryImpl
       final result = await _remote.getTransactions();
       final transactions = result.map(transactionModelToEntity).toList();
 
-      _cache.setTransactions(transactions);
+      _cache.setTransactionsCache(transactions);
 
       return Right(transactions);
     } on ServerException {
@@ -54,7 +54,7 @@ final class TransactionsRepositoryImpl
   Category getCategory(int id) {
     try {
       return _cache.getCategory(id);
-    } on Exception {
+    } on ItemNotFoundInCache {
       getCategories();
       return Category(id: 0, name: 'unknown', type: CategoryType.expense);
     }
@@ -73,9 +73,108 @@ final class TransactionsRepositoryImpl
       final result = await _remote.getCategories();
       final categories = result.map(categoryModelToEntity).toList();
 
-      _cache.setCategories(categories);
+      _cache.setCategoriesCache(categories);
 
       return Right(categories);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addTransaction(Transaction transaction) async {
+    try {
+      await _remote.addTransaction(transactionEntityToModel(transaction));
+      _cache.addTransaction(transaction);
+
+      return const Right(null);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Transaction>> getTransaction(String id) async {
+    try {
+      // cache
+      return Right(_cache.getTransaction(id));
+    } on ItemNotFoundInCache {
+      // remote
+      try {
+        final transaction = await _remote.getTransaction(id);
+        return Right(transactionModelToEntity(transaction));
+      } on ServerException {
+        return const Left(Failure.serverFailure());
+      }
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteTransaction(String id) async {
+    try {
+      await _remote.deleteTransaction(id);
+      _cache.deleteTransaction(id);
+      return const Right(null);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateTransaction(
+      Transaction transaction) async {
+    try {
+      await _remote.updateTransaction(transactionEntityToModel(transaction));
+      _cache.updateTransaction(transaction);
+      return const Right(null);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addCategory(Category category) async {
+    try {
+      await _remote.addCategory(categoryEntityToModel(category));
+      _cache.addCategory(category);
+
+      return const Right(null);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCategory(int id) async {
+    try {
+      await _remote.deleteCategory(id);
+      _cache.deleteCategory(id);
+      return const Right(null);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateCategory(Category category) async {
+    try {
+      await _remote.updateCategory(categoryEntityToModel(category));
+      _cache.updateCategory(category);
+      return const Right(null);
     } on ServerException {
       return const Left(Failure.serverFailure());
     } catch (_) {

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:money_manager/application/core/styles.dart';
-import 'package:money_manager/application/pages/core/widgets/error.dart';
 
+import '../../core/styles.dart';
+import '../core/widgets/error.dart';
 import '../../../core/di/injectable.dart';
+import '../core/widgets/shimmer.dart';
+import '../core/widgets/skelton.dart';
 import 'cubit/category_cubit.dart';
-import 'widgets/categories_loading.dart';
-import 'widgets/expense_category.dart';
-import 'widgets/income_category.dart';
+
+part 'widgets/_loading.dart';
+part 'widgets/_expense_list.dart';
+part 'widgets/_income_list.dart';
 
 class CategoryPageProvider extends StatelessWidget {
   const CategoryPageProvider({super.key});
@@ -16,15 +19,13 @@ class CategoryPageProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<CategoryCubit>(),
-      child: const CategoryPage(),
+      child: const _CategoryPage(),
     );
   }
 }
 
-class CategoryPage extends StatelessWidget {
-  static const path = '/category';
-
-  const CategoryPage({super.key});
+class _CategoryPage extends StatelessWidget {
+  const _CategoryPage();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,6 @@ class CategoryPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Categories'),
           bottom: const TabBar(
-            labelColor: Colors.black,
             tabs: [
               Tab(text: 'Income'),
               Tab(text: 'Expense'),
@@ -51,17 +51,17 @@ class CategoryPage extends StatelessWidget {
           child: BlocBuilder<CategoryCubit, CategoryState>(
             builder: (context, state) {
               if (state is Loading) {
-                return const CategoriesLoadingWidget();
+                return const _LoadingWidget();
               }
 
               if (state is Error) {
-                return const Center(child: CustomErrorWidget());
+                return const CustomErrorWidget();
               }
 
               return const TabBarView(
                 children: [
-                  IncomeList(),
-                  ExpenseList(),
+                  _IncomeList(),
+                  _ExpenseList(),
                 ],
               );
             },

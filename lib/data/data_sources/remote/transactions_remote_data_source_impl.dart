@@ -9,7 +9,7 @@ final class TransactionsRemoteDataSourceImpl
     implements TransactionsRemoteDataSource {
   @override
   Future<List<TransactionModel>> getTransactions() async {
-    await Future.delayed(const Duration(seconds: 5));
+    // await Future.delayed(const Duration(seconds: 10));
 
     return List.generate(
       10,
@@ -33,5 +33,45 @@ final class TransactionsRemoteDataSourceImpl
         type: index % 2 == 0 ? 'i' : 'e',
       ),
     );
+  }
+
+  @override
+  Future<void> addTransaction(TransactionModel transaction) async {
+    return;
+  }
+
+  @override
+  Future<void> deleteCategory(int id) async {
+    return;
+  }
+
+  @override
+  Future<void> deleteTransaction(String id) async {
+    return;
+  }
+
+  @override
+  Future<void> addCategory(CategoryModel category) async {
+    return;
+  }
+
+  @override
+  Future<TransactionModel> getTransaction(String id) async {
+    return TransactionModel(
+        id: 'id',
+        purpose: 'purpose',
+        amount: 0,
+        date: DateTime.now(),
+        category: 1);
+  }
+
+  @override
+  Future<void> updateCategory(CategoryModel category) async {
+    return;
+  }
+
+  @override
+  Future<void> updateTransaction(TransactionModel transaction) async {
+    return;
   }
 }

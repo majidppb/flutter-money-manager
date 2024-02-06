@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../pages/transactions/transactions/transactions.dart';
-import 'routes.dart';
 import 'theme.dart' as theme;
 
 class MainApp extends StatelessWidget {
@@ -12,11 +11,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Money Manager',
       themeMode: ThemeMode.system,
-      theme: theme.lightTheme,
-      darkTheme: theme.darkTheme,
+      theme: theme.light,
+      darkTheme: theme.dark,
       restorationScopeId: 'root',
-      routes: routes,
-      initialRoute: TransactionsPage.path,
+      home: const TransactionsPageProvider(),
     );
   }
 }

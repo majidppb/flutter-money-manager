@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 
-final lightTheme = ThemeData(
-  useMaterial3: true,
+import '../core/colors.dart';
+
+final light = ThemeData(
   brightness: Brightness.light,
-  colorSchemeSeed: Colors.blueGrey,
-  inputDecorationTheme: _inputDecorationTheme,
+  colorSchemeSeed: kAppSeedColor,
+  inputDecorationTheme: _inputDecoration,
+  snackBarTheme: _snackBar,
 );
 
-final darkTheme = lightTheme.copyWith(brightness: Brightness.dark);
+final dark = ThemeData(
+  colorSchemeSeed: kAppSeedColor,
+  brightness: Brightness.dark,
+  inputDecorationTheme: _inputDecoration,
+  snackBarTheme: _snackBar,
+);
 
-final _inputDecorationTheme = InputDecorationTheme(
+const _snackBar = SnackBarThemeData(showCloseIcon: true);
+
+final _inputDecoration = InputDecorationTheme(
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
   ),

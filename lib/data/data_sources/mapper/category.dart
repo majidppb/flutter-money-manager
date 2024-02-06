@@ -1,4 +1,4 @@
-import 'package:money_manager/data/models/category_model.dart';
+import '../../models/category_model.dart';
 
 import '../../../domain/entities/category.dart';
 

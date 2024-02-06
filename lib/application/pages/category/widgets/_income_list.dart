@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of '../category.dart';
 
-import '../cubit/category_cubit.dart';
-
-class IncomeList extends StatelessWidget {
-  const IncomeList({super.key});
+class _IncomeList extends StatelessWidget {
+  const _IncomeList();
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:money_manager/core/use_case.dart';
-import 'package:money_manager/domain/entities/category.dart';
-import 'package:money_manager/domain/use_cases/get_categories.dart';
+import '../../../../core/use_case.dart';
+import '../../../../domain/entities/category.dart';
+import '../../../../domain/use_cases/get_categories.dart';
 
 part 'category_state.dart';
 part 'category_cubit.freezed.dart';
@@ -15,7 +15,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit(this._getCategories) : super(const Loading());
 
   Future<void> getAllCategories() async {
-    final result = await _getCategories.call(NoParams());
+    final result = await _getCategories.call(noParams);
 
     emit(
       result.fold(

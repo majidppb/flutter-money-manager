@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:money_manager/application/pages/core/widgets/error.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../domain/entities/transaction.dart';
+import '../../../core/colors.dart';
+import '../../core/widgets/error.dart';
 import '../../../../core/di/injectable.dart';
 import '../../../../domain/entities/category.dart';
 import '../../category/category.dart';
+import '../../core/widgets/shimmer.dart';
+import '../../core/widgets/skelton.dart';
+import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
 import 'cubit/transactions_cubit.dart';
-import 'widgets/transaction_loading.dart';
+
+part 'widgets/_loading.dart';
+part 'widgets/_transaction_list.dart';
 
 class TransactionsPageProvider extends StatelessWidget {
   const TransactionsPageProvider({super.key});
@@ -16,15 +24,13 @@ class TransactionsPageProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<TransactionsCubit>(),
-      child: const TransactionsPage(),
+      child: const _TransactionsPage(),
     );
   }
 }
 
-class TransactionsPage extends StatelessWidget {
-  static const path = '/transactions';
-
-  const TransactionsPage({super.key});
+class _TransactionsPage extends StatelessWidget {
+  const _TransactionsPage();
 
   @override
   Widget build(BuildContext context) {
@@ -32,70 +38,70 @@ class TransactionsPage extends StatelessWidget {
       (_) => context.read<TransactionsCubit>().getAllTransactions(),
     );
 
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Transactions'),
-          actions: [
-            TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(CategoryPage.path),
-                child: const Text('Categories'))
-          ],
-        ),
-        body: BlocBuilder<TransactionsCubit, TransactionsState>(
-            builder: (context, state) {
-          if (state is Loading) {
-            return const TransactionsLoadingWidget();
-          }
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Transactions'),
+            actions: [
+              TextButton.icon(
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CategoryPageProvider(),
+                )),
+                label: const Text('Category'),
+                icon: const Icon(Icons.category_rounded),
+              )
+            ],
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: 'Expense'),
+                Tab(text: 'Income'),
+              ],
+            ),
+          ),
+          body: BlocBuilder<TransactionsCubit, TransactionsState>(
+              builder: (context, state) {
+            if (state is Loading) {
+              return const _LoadingWidget();
+            }
 
-          if (state is Error) {
-            return const Center(child: CustomErrorWidget());
-          }
+            if (state is Error) {
+              return const CustomErrorWidget();
+            }
 
-          return ListView.separated(
-            itemBuilder: (context, index) {
-              final transaction = state.transactions[index];
-              return Slidable(
-                key: Key(transaction.id),
-                startActionPane:
-                    ActionPane(motion: const BehindMotion(), children: [
-                  TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.delete_forever),
-                      label: const Text('Delete'))
-                ]),
-                child: ListTile(
-                  leading: CircleAvatar(
-                      backgroundColor:
-                          transaction.category.type == CategoryType.expense
-                              ? Colors.blueGrey
-                              : Colors.lime,
-                      radius: 50,
-                      child: Text(
-                        _parseDate(transaction.date),
-                        textAlign: TextAlign.center,
-                      )),
-                  title: Text(transaction.amount.toString()),
-                  subtitle: Text(
-                      '${transaction.category.name}: ${transaction.purpose}'),
+            return TabBarView(
+              children: [
+                _TransactionListWidget(
+                  type: CategoryType.expense,
+                  transactions: (state as Transactions).expense,
+                  onUpdate: _onNewOrUpdate,
                 ),
-              );
-            },
-            separatorBuilder: (ctx, index) {
-              return const Divider();
-            },
-            itemCount: (state as Transactions).transactions.length,
-          );
-        }),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          //     Navigator.of(context).pushNamed(NewOrUpdateTransactionPage.path),
-          tooltip: 'New Transaction',
-          child: const Icon(Icons.add_rounded),
-        ));
+                _TransactionListWidget(
+                  type: CategoryType.income,
+                  transactions: state.income,
+                  onUpdate: _onNewOrUpdate,
+                ),
+              ],
+            );
+          }),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => _onNewOrUpdate(context),
+            tooltip: 'New Transaction',
+            child: const Icon(Icons.add_rounded),
+          )),
+    );
   }
 
-  String _parseDate(DateTime date) {
-    return '${date.day}\n${date.month}';
+  /// Go to the NewOrUpdateTransaction Page.
+  /// Refresh the transactions if there are any changes.
+  void _onNewOrUpdate(BuildContext context, {String? id}) {
+    Navigator.of(context)
+        .push<bool>(MaterialPageRoute(
+            builder: (context) => NewOrUpdateTransactionProvider(id: id)))
+        .then((isRefreshNeeded) {
+      if (isRefreshNeeded == true) {
+        context.read<TransactionsCubit>().getAllTransactions();
+      }
+    });
   }
 }

@@ -9,3 +9,5 @@ abstract class UseCase<Type, Params> {
 abstract class Params {}
 
 final class NoParams extends Params {}
+
+final noParams = NoParams();

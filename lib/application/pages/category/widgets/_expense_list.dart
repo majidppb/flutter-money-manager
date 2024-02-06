@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:money_manager/application/pages/category/cubit/category_cubit.dart';
+part of '../category.dart';
 
-class ExpenseList extends StatelessWidget {
-  const ExpenseList({super.key});
+class _ExpenseList extends StatelessWidget {
+  const _ExpenseList();
 
   @override
   Widget build(BuildContext context) {
