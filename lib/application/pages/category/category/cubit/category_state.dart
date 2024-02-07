@@ -7,5 +7,5 @@ class CategoryState with _$CategoryState {
   const factory CategoryState({
     required List<Category> income,
     required List<Category> expense,
-  }) = Categories;
+  }) = Loaded;
 }

@@ -7,8 +7,9 @@ import '../../../../../domain/entities/category.dart';
 import '../../../../../domain/use_cases/new_or_update_transaction.dart';
 import '../../../../../domain/use_cases/get_categories.dart';
 import '../../../../../domain/use_cases/get_transaction.dart';
-import '../../../../../domain/use_cases/params/new_or_update_transaction.dart.dart';
+import '../../../../../domain/use_cases/params/new_or_update_transaction.dart';
 import '../../../../../domain/use_cases/params/get_transaction.dart';
+import '../../../core/new_or_update_status.dart';
 
 part 'new_or_update_transaction_state.dart';
 part 'new_or_update_transaction_cubit.freezed.dart';
@@ -91,7 +92,7 @@ class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
         (state as Loaded).type != null &&
         (state as Loaded).category != null) {
       emit(
-        (state as Loaded).copyWith(status: NewOrUpdateTransactionStatus.saving),
+        (state as Loaded).copyWith(status: NewOrUpdateStatus.saving),
       );
 
       final result = await _addTransaction.call(NewOrUpdateTransactionParams(
@@ -105,15 +106,14 @@ class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
       emit(
         result.fold(
           ifLeft: (failure) => (state as Loaded)
-              .copyWith(status: NewOrUpdateTransactionStatus.savingFailed),
-          ifRight: (success) => (state as Loaded)
-              .copyWith(status: NewOrUpdateTransactionStatus.saved),
+              .copyWith(status: NewOrUpdateStatus.savingFailed),
+          ifRight: (success) =>
+              (state as Loaded).copyWith(status: NewOrUpdateStatus.saved),
         ),
       );
     } else {
       emit(
-        (state as Loaded)
-            .copyWith(status: NewOrUpdateTransactionStatus.invalid),
+        (state as Loaded).copyWith(status: NewOrUpdateStatus.invalid),
       );
     }
   }

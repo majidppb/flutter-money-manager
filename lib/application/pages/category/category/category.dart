@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/styles.dart';
-import '../core/widgets/error.dart';
-import '../../../core/di/injectable.dart';
-import '../core/widgets/shimmer.dart';
-import '../core/widgets/skelton.dart';
+import '../../../../domain/entities/category.dart';
+import '../../../core/styles.dart';
+import '../../core/widgets/error.dart';
+import '../../../../core/di/injectable.dart';
+import '../../core/widgets/shimmer.dart';
+import '../../core/widgets/skelton.dart';
+import '../new_or_update_category/new_or_update_category.dart';
 import 'cubit/category_cubit.dart';
 
 part 'widgets/_loading.dart';
-part 'widgets/_expense_list.dart';
-part 'widgets/_income_list.dart';
+part 'widgets/_category_list.dart';
 
 class CategoryPageProvider extends StatelessWidget {
   const CategoryPageProvider({super.key});
@@ -58,16 +59,40 @@ class _CategoryPage extends StatelessWidget {
                 return const CustomErrorWidget();
               }
 
-              return const TabBarView(
+              return TabBarView(
                 children: [
-                  _IncomeList(),
-                  _ExpenseList(),
+                  _CategoryList(
+                    categories: (state as Loaded).income,
+                    onUpdate: _onNewOrUpdate,
+                  ),
+                  _CategoryList(
+                    categories: state.expense,
+                    onUpdate: _onNewOrUpdate,
+                  ),
                 ],
               );
             },
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _onNewOrUpdate(context),
+          tooltip: 'New Category',
+          child: const Icon(Icons.add_rounded),
+        ),
       ),
     );
+  }
+
+  /// Go to the NewOrUpdateCategory Page.
+  /// Refresh the categories if there are any changes.
+  void _onNewOrUpdate(BuildContext context, {int? id}) {
+    Navigator.of(context)
+        .push<bool>(MaterialPageRoute(
+            builder: (context) => NewOrUpdateCategoryProvider(id: id)))
+        .then((isRefreshNeeded) {
+      if (isRefreshNeeded == true) {
+        context.read<CategoryCubit>().getAllCategories();
+      }
+    });
   }
 }

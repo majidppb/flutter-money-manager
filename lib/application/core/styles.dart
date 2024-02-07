@@ -4,4 +4,5 @@ import 'package:flutter/material.dart';
 const kScaffoldHPadding = EdgeInsets.symmetric(horizontal: 8);
 
 const kHeight10 = SizedBox(height: 10);
+const kHeight30 = SizedBox(height: 30);
 const kHeight50 = SizedBox(height: 50);

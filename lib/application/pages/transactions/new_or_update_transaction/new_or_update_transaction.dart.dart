@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/di/injectable.dart';
 import '../../../core/styles.dart';
 import '../../../../domain/entities/category.dart';
+import '../../core/new_or_update_status.dart';
 import '../../core/widgets/error.dart';
 import '../../core/widgets/shimmer.dart';
 import '../../core/widgets/skelton.dart';
@@ -200,7 +201,8 @@ class _NewOrUpdateTransactionPageState
                 // Submit
                 BlocListener<NewOrUpdateTransactionCubit,
                     NewOrUpdateTransactionState>(
-                  listener: _onStatusChange,
+                  listener: (context, state) =>
+                      (state as Loaded).status.snackBarNotify(context),
                   child: Row(
                     children: [
                       TextButton(
@@ -209,7 +211,7 @@ class _NewOrUpdateTransactionPageState
                       ),
                       const SizedBox(width: 25),
                       ElevatedButton(
-                        onPressed: _addTransaction,
+                        onPressed: _saveTransaction,
                         child: const Text('Save'),
                       ),
                     ],
@@ -230,50 +232,7 @@ class _NewOrUpdateTransactionPageState
     super.dispose();
   }
 
-  void _onStatusChange(
-      BuildContext context, NewOrUpdateTransactionState state) {
-    switch ((state as Loaded).status) {
-      case NewOrUpdateTransactionStatus.editing:
-        return;
-      case NewOrUpdateTransactionStatus.invalid:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please enter all the data'),
-            backgroundColor: Colors.red,
-            duration: Duration(seconds: 1),
-          ),
-        );
-        return;
-      case NewOrUpdateTransactionStatus.saving:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Saving ..'),
-            duration: Duration(seconds: 1),
-          ),
-        );
-        return;
-      case NewOrUpdateTransactionStatus.saved:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Transaction Saved !'),
-            backgroundColor: Colors.green,
-          ),
-        );
-        Navigator.of(context).pop<bool>(true);
-        return;
-      case NewOrUpdateTransactionStatus.savingFailed:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Saving Failed !'),
-            backgroundColor: Colors.red,
-            showCloseIcon: true,
-          ),
-        );
-        return;
-    }
-  }
-
-  void _addTransaction() => context.read<NewOrUpdateTransactionCubit>().save(
+  void _saveTransaction() => context.read<NewOrUpdateTransactionCubit>().save(
         purpose: _purposeController.text,
         amount: double.tryParse(_amountController.text),
       );

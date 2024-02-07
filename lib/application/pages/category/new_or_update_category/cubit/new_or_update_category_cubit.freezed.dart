@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'new_or_update_transaction_cubit.dart';
+part of 'new_or_update_category_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,19 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$NewOrUpdateTransactionState {
+mixin _$NewOrUpdateCategoryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)
+            NewOrUpdateStatus status, String? name, CategoryType? type)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,13 +30,7 @@ mixin _$NewOrUpdateTransactionState {
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,13 +39,7 @@ mixin _$NewOrUpdateTransactionState {
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -87,19 +69,17 @@ mixin _$NewOrUpdateTransactionState {
 }
 
 /// @nodoc
-abstract class $NewOrUpdateTransactionStateCopyWith<$Res> {
-  factory $NewOrUpdateTransactionStateCopyWith(
-          NewOrUpdateTransactionState value,
-          $Res Function(NewOrUpdateTransactionState) then) =
-      _$NewOrUpdateTransactionStateCopyWithImpl<$Res,
-          NewOrUpdateTransactionState>;
+abstract class $NewOrUpdateCategoryStateCopyWith<$Res> {
+  factory $NewOrUpdateCategoryStateCopyWith(NewOrUpdateCategoryState value,
+          $Res Function(NewOrUpdateCategoryState) then) =
+      _$NewOrUpdateCategoryStateCopyWithImpl<$Res, NewOrUpdateCategoryState>;
 }
 
 /// @nodoc
-class _$NewOrUpdateTransactionStateCopyWithImpl<$Res,
-        $Val extends NewOrUpdateTransactionState>
-    implements $NewOrUpdateTransactionStateCopyWith<$Res> {
-  _$NewOrUpdateTransactionStateCopyWithImpl(this._value, this._then);
+class _$NewOrUpdateCategoryStateCopyWithImpl<$Res,
+        $Val extends NewOrUpdateCategoryState>
+    implements $NewOrUpdateCategoryStateCopyWith<$Res> {
+  _$NewOrUpdateCategoryStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -116,7 +96,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$NewOrUpdateTransactionStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$NewOrUpdateCategoryStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -130,7 +110,7 @@ class _$LoadingImpl implements Loading {
 
   @override
   String toString() {
-    return 'NewOrUpdateTransactionState.loading()';
+    return 'NewOrUpdateCategoryState.loading()';
   }
 
   @override
@@ -148,13 +128,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)
+            NewOrUpdateStatus status, String? name, CategoryType? type)
         loaded,
   }) {
     return loading();
@@ -166,13 +140,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
   }) {
     return loading?.call();
@@ -184,13 +152,7 @@ class _$LoadingImpl implements Loading {
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
     required TResult orElse(),
   }) {
@@ -235,7 +197,7 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements NewOrUpdateTransactionState {
+abstract class Loading implements NewOrUpdateCategoryState {
   const factory Loading() = _$LoadingImpl;
 }
 
@@ -248,7 +210,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$NewOrUpdateTransactionStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$NewOrUpdateCategoryStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -262,7 +224,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'NewOrUpdateTransactionState.error()';
+    return 'NewOrUpdateCategoryState.error()';
   }
 
   @override
@@ -280,13 +242,7 @@ class _$ErrorImpl implements Error {
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)
+            NewOrUpdateStatus status, String? name, CategoryType? type)
         loaded,
   }) {
     return error();
@@ -298,13 +254,7 @@ class _$ErrorImpl implements Error {
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
   }) {
     return error?.call();
@@ -316,13 +266,7 @@ class _$ErrorImpl implements Error {
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
     required TResult orElse(),
   }) {
@@ -367,7 +311,7 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements NewOrUpdateTransactionState {
+abstract class Error implements NewOrUpdateCategoryState {
   const factory Error() = _$ErrorImpl;
 }
 
@@ -377,19 +321,12 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {NewOrUpdateStatus status,
-      String? purpose,
-      double? amount,
-      DateTime? date,
-      CategoryType? type,
-      Category? category,
-      List<Category> categories});
+  $Res call({NewOrUpdateStatus status, String? name, CategoryType? type});
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$NewOrUpdateTransactionStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$NewOrUpdateCategoryStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -399,42 +336,22 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? purpose = freezed,
-    Object? amount = freezed,
-    Object? date = freezed,
+    Object? name = freezed,
     Object? type = freezed,
-    Object? category = freezed,
-    Object? categories = null,
   }) {
     return _then(_$LoadedImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as NewOrUpdateStatus,
-      purpose: freezed == purpose
-          ? _value.purpose
-          : purpose // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as CategoryType?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as Category?,
-      categories: null == categories
-          ? _value._categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<Category>,
     ));
   }
 }
@@ -443,40 +360,19 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements Loaded {
   const _$LoadedImpl(
-      {this.status = NewOrUpdateStatus.editing,
-      this.purpose,
-      this.amount,
-      this.date,
-      this.type,
-      this.category,
-      final List<Category> categories = const []})
-      : _categories = categories;
+      {this.status = NewOrUpdateStatus.editing, this.name, this.type});
 
   @override
   @JsonKey()
   final NewOrUpdateStatus status;
   @override
-  final String? purpose;
-  @override
-  final double? amount;
-  @override
-  final DateTime? date;
+  final String? name;
   @override
   final CategoryType? type;
-  @override
-  final Category? category;
-  final List<Category> _categories;
-  @override
-  @JsonKey()
-  List<Category> get categories {
-    if (_categories is EqualUnmodifiableListView) return _categories;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
-  }
 
   @override
   String toString() {
-    return 'NewOrUpdateTransactionState.loaded(status: $status, purpose: $purpose, amount: $amount, date: $date, type: $type, category: $category, categories: $categories)';
+    return 'NewOrUpdateCategoryState.loaded(status: $status, name: $name, type: $type)';
   }
 
   @override
@@ -485,19 +381,12 @@ class _$LoadedImpl implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.purpose, purpose) || other.purpose == purpose) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.date, date) || other.date == date) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, purpose, amount, date,
-      type, category, const DeepCollectionEquality().hash(_categories));
+  int get hashCode => Object.hash(runtimeType, status, name, type);
 
   @JsonKey(ignore: true)
   @override
@@ -511,16 +400,10 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)
+            NewOrUpdateStatus status, String? name, CategoryType? type)
         loaded,
   }) {
-    return loaded(status, purpose, amount, date, type, category, categories);
+    return loaded(status, name, type);
   }
 
   @override
@@ -529,17 +412,10 @@ class _$LoadedImpl implements Loaded {
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
   }) {
-    return loaded?.call(
-        status, purpose, amount, date, type, category, categories);
+    return loaded?.call(status, name, type);
   }
 
   @override
@@ -548,18 +424,12 @@ class _$LoadedImpl implements Loaded {
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
-            NewOrUpdateStatus status,
-            String? purpose,
-            double? amount,
-            DateTime? date,
-            CategoryType? type,
-            Category? category,
-            List<Category> categories)?
+            NewOrUpdateStatus status, String? name, CategoryType? type)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(status, purpose, amount, date, type, category, categories);
+      return loaded(status, name, type);
     }
     return orElse();
   }
@@ -599,23 +469,15 @@ class _$LoadedImpl implements Loaded {
   }
 }
 
-abstract class Loaded implements NewOrUpdateTransactionState {
+abstract class Loaded implements NewOrUpdateCategoryState {
   const factory Loaded(
       {final NewOrUpdateStatus status,
-      final String? purpose,
-      final double? amount,
-      final DateTime? date,
-      final CategoryType? type,
-      final Category? category,
-      final List<Category> categories}) = _$LoadedImpl;
+      final String? name,
+      final CategoryType? type}) = _$LoadedImpl;
 
   NewOrUpdateStatus get status;
-  String? get purpose;
-  double? get amount;
-  DateTime? get date;
+  String? get name;
   CategoryType? get type;
-  Category? get category;
-  List<Category> get categories;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;

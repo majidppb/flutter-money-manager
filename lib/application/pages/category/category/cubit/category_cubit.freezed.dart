@@ -41,21 +41,21 @@ mixin _$CategoryState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(Categories value) $default, {
+    TResult Function(Loaded value) $default, {
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(Categories value)? $default, {
+    TResult? Function(Loaded value)? $default, {
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(Categories value)? $default, {
+    TResult Function(Loaded value)? $default, {
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -154,7 +154,7 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(Categories value) $default, {
+    TResult Function(Loaded value) $default, {
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -164,7 +164,7 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(Categories value)? $default, {
+    TResult? Function(Loaded value)? $default, {
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
   }) {
@@ -174,7 +174,7 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(Categories value)? $default, {
+    TResult Function(Loaded value)? $default, {
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -263,7 +263,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(Categories value) $default, {
+    TResult Function(Loaded value) $default, {
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -273,7 +273,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(Categories value)? $default, {
+    TResult? Function(Loaded value)? $default, {
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
   }) {
@@ -283,7 +283,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(Categories value)? $default, {
+    TResult Function(Loaded value)? $default, {
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -300,20 +300,20 @@ abstract class Error implements CategoryState {
 }
 
 /// @nodoc
-abstract class _$$CategoriesImplCopyWith<$Res> {
-  factory _$$CategoriesImplCopyWith(
-          _$CategoriesImpl value, $Res Function(_$CategoriesImpl) then) =
-      __$$CategoriesImplCopyWithImpl<$Res>;
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Category> income, List<Category> expense});
 }
 
 /// @nodoc
-class __$$CategoriesImplCopyWithImpl<$Res>
-    extends _$CategoryStateCopyWithImpl<$Res, _$CategoriesImpl>
-    implements _$$CategoriesImplCopyWith<$Res> {
-  __$$CategoriesImplCopyWithImpl(
-      _$CategoriesImpl _value, $Res Function(_$CategoriesImpl) _then)
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$CategoryStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -322,7 +322,7 @@ class __$$CategoriesImplCopyWithImpl<$Res>
     Object? income = null,
     Object? expense = null,
   }) {
-    return _then(_$CategoriesImpl(
+    return _then(_$LoadedImpl(
       income: null == income
           ? _value._income
           : income // ignore: cast_nullable_to_non_nullable
@@ -337,8 +337,8 @@ class __$$CategoriesImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CategoriesImpl implements Categories {
-  const _$CategoriesImpl(
+class _$LoadedImpl implements Loaded {
+  const _$LoadedImpl(
       {required final List<Category> income,
       required final List<Category> expense})
       : _income = income,
@@ -369,7 +369,7 @@ class _$CategoriesImpl implements Categories {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CategoriesImpl &&
+            other is _$LoadedImpl &&
             const DeepCollectionEquality().equals(other._income, _income) &&
             const DeepCollectionEquality().equals(other._expense, _expense));
   }
@@ -383,8 +383,8 @@ class _$CategoriesImpl implements Categories {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CategoriesImplCopyWith<_$CategoriesImpl> get copyWith =>
-      __$$CategoriesImplCopyWithImpl<_$CategoriesImpl>(this, _$identity);
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -424,7 +424,7 @@ class _$CategoriesImpl implements Categories {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(Categories value) $default, {
+    TResult Function(Loaded value) $default, {
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -434,7 +434,7 @@ class _$CategoriesImpl implements Categories {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(Categories value)? $default, {
+    TResult? Function(Loaded value)? $default, {
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
   }) {
@@ -444,7 +444,7 @@ class _$CategoriesImpl implements Categories {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(Categories value)? $default, {
+    TResult Function(Loaded value)? $default, {
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -456,14 +456,14 @@ class _$CategoriesImpl implements Categories {
   }
 }
 
-abstract class Categories implements CategoryState {
-  const factory Categories(
+abstract class Loaded implements CategoryState {
+  const factory Loaded(
       {required final List<Category> income,
-      required final List<Category> expense}) = _$CategoriesImpl;
+      required final List<Category> expense}) = _$LoadedImpl;
 
   List<Category> get income;
   List<Category> get expense;
   @JsonKey(ignore: true)
-  _$$CategoriesImplCopyWith<_$CategoriesImpl> get copyWith =>
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 
 import '../../../../domain/entities/transaction.dart';
 import '../../../core/colors.dart';
+import '../../category/category/category.dart';
 import '../../core/widgets/error.dart';
 import '../../../../core/di/injectable.dart';
 import '../../../../domain/entities/category.dart';
-import '../../category/category.dart';
 import '../../core/widgets/shimmer.dart';
 import '../../core/widgets/skelton.dart';
 import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
@@ -41,54 +41,55 @@ class _TransactionsPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Transactions'),
-            actions: [
-              TextButton.icon(
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const CategoryPageProvider(),
-                )),
-                label: const Text('Category'),
-                icon: const Icon(Icons.category_rounded),
-              )
+        appBar: AppBar(
+          title: const Text('Transactions'),
+          actions: [
+            TextButton.icon(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const CategoryPageProvider(),
+              )),
+              label: const Text('Category'),
+              icon: const Icon(Icons.category_rounded),
+            )
+          ],
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'Expense'),
+              Tab(text: 'Income'),
             ],
-            bottom: const TabBar(
-              tabs: [
-                Tab(text: 'Expense'),
-                Tab(text: 'Income'),
-              ],
-            ),
           ),
-          body: BlocBuilder<TransactionsCubit, TransactionsState>(
-              builder: (context, state) {
-            if (state is Loading) {
-              return const _LoadingWidget();
-            }
+        ),
+        body: BlocBuilder<TransactionsCubit, TransactionsState>(
+            builder: (context, state) {
+          if (state is Loading) {
+            return const _LoadingWidget();
+          }
 
-            if (state is Error) {
-              return const CustomErrorWidget();
-            }
+          if (state is Error) {
+            return const CustomErrorWidget();
+          }
 
-            return TabBarView(
-              children: [
-                _TransactionListWidget(
-                  type: CategoryType.expense,
-                  transactions: (state as Transactions).expense,
-                  onUpdate: _onNewOrUpdate,
-                ),
-                _TransactionListWidget(
-                  type: CategoryType.income,
-                  transactions: state.income,
-                  onUpdate: _onNewOrUpdate,
-                ),
-              ],
-            );
-          }),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _onNewOrUpdate(context),
-            tooltip: 'New Transaction',
-            child: const Icon(Icons.add_rounded),
-          )),
+          return TabBarView(
+            children: [
+              _TransactionListWidget(
+                type: CategoryType.expense,
+                transactions: (state as Transactions).expense,
+                onUpdate: _onNewOrUpdate,
+              ),
+              _TransactionListWidget(
+                type: CategoryType.income,
+                transactions: state.income,
+                onUpdate: _onNewOrUpdate,
+              ),
+            ],
+          );
+        }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _onNewOrUpdate(context),
+          tooltip: 'New Transaction',
+          child: const Icon(Icons.add_rounded),
+        ),
+      ),
     );
   }
 

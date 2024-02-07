@@ -5,7 +5,7 @@ import '../../../core/use_case.dart';
 import '../core/failure/failure.dart';
 import '../entities/transaction.dart';
 import '../repositories/transactions.dart';
-import 'params/new_or_update_transaction.dart.dart';
+import 'params/new_or_update_transaction.dart';
 
 @injectable
 class NewOrUpdateTransaction
