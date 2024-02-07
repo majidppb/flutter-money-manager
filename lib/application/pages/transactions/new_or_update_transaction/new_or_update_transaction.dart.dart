@@ -77,7 +77,15 @@ class _NewOrUpdateTransactionPageState
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                kHeight10,
+                // Title
+                Text(
+                  context.read<NewOrUpdateTransactionCubit>().id == null
+                      ? 'New Transaction'
+                      : 'Update Transaction',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+
+                kHeight30,
 
                 // Purpose
                 TextFormField(
@@ -106,8 +114,9 @@ class _NewOrUpdateTransactionPageState
                     NewOrUpdateTransactionState, CategoryType?>(
                   selector: (state) => (state as Loaded).type,
                   builder: (context, type) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -204,12 +213,12 @@ class _NewOrUpdateTransactionPageState
                   listener: (context, state) =>
                       (state as Loaded).status.snackBarNotify(context),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextButton(
                         onPressed: Navigator.of(context).pop,
                         child: const Text('Cancel'),
                       ),
-                      const SizedBox(width: 25),
                       ElevatedButton(
                         onPressed: _saveTransaction,
                         child: const Text('Save'),

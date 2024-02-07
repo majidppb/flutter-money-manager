@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -42,13 +43,28 @@ class TransactionsCubit extends Cubit<TransactionsState> {
     );
   }
 
-  Future<void> delete(String id) async {
+  Future<void> delete(BuildContext context, String id) async {
     final result =
         await _deleteTransaction.call(DeleteTransactionParams(id: id));
 
     result.fold(
-      ifLeft: (failure) => null,
-      ifRight: (success) => getAllTransactions(),
+      ifLeft: (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed deleting category'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      },
+      ifRight: (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Successfully deleted category'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        getAllTransactions();
+      },
     );
   }
 }

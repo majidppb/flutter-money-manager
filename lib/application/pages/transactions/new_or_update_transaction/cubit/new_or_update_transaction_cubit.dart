@@ -16,21 +16,21 @@ part 'new_or_update_transaction_cubit.freezed.dart';
 
 @injectable
 class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
-  final String? _id;
+  final String? id;
   final GetCategories _getCategories;
   final NewOrUpdateTransaction _addTransaction;
   final GetTransaction _getTransaction;
 
   NewOrUpdateTransactionCubit(this._getCategories, this._addTransaction,
-      this._getTransaction, @factoryParam this._id)
+      this._getTransaction, @factoryParam this.id)
       : super(const Loading());
 
   Future<void> getValues() async {
     // If [_id] is null: New transaction
-    if (_id == null) {
+    if (id == null) {
       emit(const Loaded());
     } else {
-      final result = await _getTransaction.call(GetTransactionParams(id: _id));
+      final result = await _getTransaction.call(GetTransactionParams(id: id!));
 
       result.fold(
         ifLeft: (failure) {
@@ -96,7 +96,7 @@ class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
       );
 
       final result = await _addTransaction.call(NewOrUpdateTransactionParams(
-        id: _id,
+        id: id,
         purpose: purpose,
         amount: amount,
         date: (state as Loaded).date!,
