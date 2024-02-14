@@ -13,8 +13,11 @@ import 'cubit/category_cubit.dart';
 part 'widgets/_loading.dart';
 part 'widgets/_category_list.dart';
 
-class CategoryPageProvider extends StatelessWidget {
-  const CategoryPageProvider({super.key});
+class CategoryProvider extends StatelessWidget {
+  static const icon =
+      Hero(tag: 'category', child: Icon(Icons.category_rounded));
+
+  const CategoryProvider({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class _CategoryPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          leading: CategoryProvider.icon,
           title: const Text('Categories'),
           bottom: const TabBar(
             tabs: [

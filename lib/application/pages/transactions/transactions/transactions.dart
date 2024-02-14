@@ -11,6 +11,7 @@ import '../../../../core/di/injectable.dart';
 import '../../../../domain/entities/category.dart';
 import '../../core/widgets/shimmer.dart';
 import '../../core/widgets/skelton.dart';
+import '../../settings/settings.dart';
 import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
 import 'cubit/transactions_cubit.dart';
 
@@ -18,6 +19,8 @@ part 'widgets/_loading.dart';
 part 'widgets/_transaction_list.dart';
 
 class TransactionsPageProvider extends StatelessWidget {
+  static const icon = Hero(tag: 'transaction', child: Icon(Icons.list_rounded));
+
   const TransactionsPageProvider({super.key});
 
   @override
@@ -42,14 +45,19 @@ class _TransactionsPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          leading: TransactionsPageProvider.icon,
           title: const Text('Transactions'),
           actions: [
-            TextButton.icon(
+            IconButton(
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const CategoryPageProvider(),
+                builder: (context) => const CategoryProvider(),
               )),
-              label: const Text('Category'),
-              icon: const Icon(Icons.category_rounded),
+              icon: CategoryProvider.icon,
+            ),
+            IconButton(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SettingsProvider())),
+              icon: SettingsProvider.icon,
             )
           ],
           bottom: const TabBar(
