@@ -1,13 +1,20 @@
 import 'package:dart_either/dart_either.dart';
 
-import '../domain/core/failure/failure.dart';
+import '../../domain/core/failure/failure.dart';
 
-abstract class UseCase<Type, Params> {
-  Future<Either<Failure, Type>> call(Params params);
+abstract interface class UseCase<T, Param extends Params> {
+  Future<Either<Failure, T>> call(Param params);
 }
 
-abstract class Params {}
+/// Parameters for [UseCase]
+abstract base class Params {
+  const Params();
+}
 
-final class NoParams extends Params {}
+/// No Parameters for [UseCase]
+final class NoParams extends Params {
+  const NoParams._();
+}
 
-final noParams = NoParams();
+/// No Parameters for [UseCase]
+const noParams = NoParams._();

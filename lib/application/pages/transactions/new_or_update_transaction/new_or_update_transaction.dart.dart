@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/di/injectable.dart';
+import '../../../../domain/enums/category_type.dart';
 import '../../../core/styles.dart';
 import '../../../../domain/entities/category.dart';
 import '../../core/new_or_update_status.dart';
-import '../../core/widgets/error.dart';
-import '../../core/widgets/shimmer.dart';
-import '../../core/widgets/skelton.dart';
+import '../../core/utils/error.dart';
+import '../../core/utils/shimmer.dart';
+import '../../core/utils/skelton.dart';
 import 'cubit/new_or_update_transaction_cubit.dart';
 
 part 'widgets/_loading.dart';

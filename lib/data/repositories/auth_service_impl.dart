@@ -58,4 +58,7 @@ final class AuthServiceImpl with AppUserMapper implements AuthService {
       return const Left(Failure.serverFailure());
     }
   }
+
+  @override
+  String get userId => FirebaseAuth.instance.currentUser!.uid;
 }

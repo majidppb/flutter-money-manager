@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../domain/entities/category.dart';
+import '../../../../../domain/enums/category_type.dart';
 import '../../../../../domain/use_cases/get_category.dart';
 import '../../../../../domain/use_cases/new_or_update_category.dart';
 import '../../../../../domain/use_cases/params/get_category.dart';
@@ -14,7 +14,7 @@ part 'new_or_update_category_cubit.freezed.dart';
 
 @injectable
 class NewOrUpdateCategoryCubit extends Cubit<NewOrUpdateCategoryState> {
-  final int? id;
+  final String? id;
   final GetCategory _getCategory;
   final NewOrUpdateCategory _newOrUpdateCategory;
 

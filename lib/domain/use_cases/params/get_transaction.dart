@@ -3,5 +3,5 @@ import '../../../core/use_case.dart';
 final class GetTransactionParams extends Params {
   final String id;
 
-  GetTransactionParams({required this.id});
+  const GetTransactionParams({required this.id});
 }

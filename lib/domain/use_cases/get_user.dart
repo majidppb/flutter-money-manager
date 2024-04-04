@@ -10,7 +10,7 @@ import '../repositories/auth_service.dart';
 class GetUser implements UseCase<AppUser, NoParams> {
   final AuthService _authService;
 
-  GetUser(this._authService);
+  const GetUser(this._authService);
 
   @override
   Future<Either<Failure, AppUser>> call(_) async {

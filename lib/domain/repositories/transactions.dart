@@ -4,7 +4,7 @@ import '../entities/transaction.dart';
 
 import '../entities/category.dart';
 
-abstract class TransactionsRepository {
+abstract interface class TransactionsRepository {
   // Transaction
   Future<Either<Failure, List<Transaction>>> getTransactions();
   Future<Either<Failure, Transaction>> getTransaction(String id);
@@ -14,8 +14,8 @@ abstract class TransactionsRepository {
 
   // Category
   Future<Either<Failure, List<Category>>> getCategories();
-  Category getCategory(int id);
+  Category getCategory(String id);
   Future<Either<Failure, void>> addCategory(Category category);
   Future<Either<Failure, void>> updateCategory(Category category);
-  Future<Either<Failure, void>> deleteCategory(int id);
+  Future<Either<Failure, void>> deleteCategory(String id);
 }

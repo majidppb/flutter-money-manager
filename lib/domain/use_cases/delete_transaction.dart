@@ -10,7 +10,7 @@ import 'params/delete_transaction.dart';
 class DeleteTransaction implements UseCase<void, DeleteTransactionParams> {
   final TransactionsRepository _repo;
 
-  DeleteTransaction(this._repo);
+  const DeleteTransaction(this._repo);
 
   @override
   Future<Either<Failure, void>> call(params) async {

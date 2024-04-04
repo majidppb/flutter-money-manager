@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/category.dart';
 import '../../../core/styles.dart';
-import '../../core/widgets/error.dart';
+import '../../core/utils/error.dart';
 import '../../../../core/di/injectable.dart';
-import '../../core/widgets/shimmer.dart';
-import '../../core/widgets/skelton.dart';
+import '../../core/utils/shimmer.dart';
+import '../../core/utils/skelton.dart';
 import '../new_or_update_category/new_or_update_category.dart';
 import 'cubit/category_cubit.dart';
 
@@ -89,7 +89,7 @@ class _CategoryPage extends StatelessWidget {
 
   /// Go to the NewOrUpdateCategory Page.
   /// Refresh the categories if there are any changes.
-  void _onNewOrUpdate(BuildContext context, {int? id}) {
+  void _onNewOrUpdate(BuildContext context, {String? id}) {
     Navigator.of(context)
         .push<bool>(MaterialPageRoute(
             builder: (context) => NewOrUpdateCategoryProvider(id: id)))

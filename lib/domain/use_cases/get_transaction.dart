@@ -11,7 +11,7 @@ import 'params/get_transaction.dart';
 class GetTransaction implements UseCase<Transaction, GetTransactionParams> {
   final TransactionsRepository _repo;
 
-  GetTransaction(this._repo);
+  const GetTransaction(this._repo);
 
   @override
   Future<Either<Failure, Transaction>> call(params) async {

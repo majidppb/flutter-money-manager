@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/injectable.dart';
-import '../../../../domain/entities/category.dart';
+import '../../../../domain/enums/category_type.dart';
 import '../../../core/styles.dart';
 import '../../core/new_or_update_status.dart';
-import '../../core/widgets/error.dart';
+import '../../core/utils/error.dart';
 
 import 'cubit/new_or_update_category_cubit.dart';
 
 class NewOrUpdateCategoryProvider extends StatelessWidget {
-  final int? _id;
+  final String? _id;
 
-  const NewOrUpdateCategoryProvider({super.key, int? id}) : _id = id;
+  const NewOrUpdateCategoryProvider({super.key, String? id}) : _id = id;
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import '../repositories/transactions.dart';
 class GetCategories implements UseCase<List<Category>, NoParams> {
   final TransactionsRepository _repo;
 
-  GetCategories(this._repo);
+  const GetCategories(this._repo);
 
   @override
   Future<Either<Failure, List<Category>>> call(_) async {

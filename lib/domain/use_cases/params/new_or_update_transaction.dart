@@ -8,7 +8,7 @@ final class NewOrUpdateTransactionParams extends Params {
   final DateTime date;
   final Category category;
 
-  NewOrUpdateTransactionParams(
+  const NewOrUpdateTransactionParams(
       {required this.id,
       required this.purpose,
       required this.amount,

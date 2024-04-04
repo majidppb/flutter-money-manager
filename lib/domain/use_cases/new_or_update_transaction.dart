@@ -12,7 +12,7 @@ class NewOrUpdateTransaction
     implements UseCase<void, NewOrUpdateTransactionParams> {
   final TransactionsRepository _repo;
 
-  NewOrUpdateTransaction(this._repo);
+  const NewOrUpdateTransaction(this._repo);
 
   @override
   Future<Either<Failure, void>> call(params) async {

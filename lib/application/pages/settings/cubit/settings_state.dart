@@ -9,8 +9,8 @@ class SettingsState with _$SettingsState {
     required final SettingsStatus status,
   }) = _SettingsState;
 
-  factory SettingsState.initial() => SettingsState(
-        user: AppUser(email: '', name: '', photo: null),
+  factory SettingsState.initial() => const SettingsState(
+        user: AppUser(uid: '', email: '', name: '', photo: null),
         status: SettingsStatus.initial,
       );
 }

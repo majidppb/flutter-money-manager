@@ -4,13 +4,13 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../domain/entities/transaction.dart';
+import '../../../../domain/enums/category_type.dart';
 import '../../../core/colors.dart';
 import '../../category/category/category.dart';
-import '../../core/widgets/error.dart';
+import '../../core/utils/error.dart';
 import '../../../../core/di/injectable.dart';
-import '../../../../domain/entities/category.dart';
-import '../../core/widgets/shimmer.dart';
-import '../../core/widgets/skelton.dart';
+import '../../core/utils/shimmer.dart';
+import '../../core/utils/skelton.dart';
 import '../../settings/settings.dart';
 import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
 import 'cubit/transactions_cubit.dart';

@@ -1,12 +1,12 @@
 import '../../../core/use_case.dart';
-import '../../entities/category.dart';
+import '../../enums/category_type.dart';
 
 final class NewOrUpdateCategoryParams extends Params {
-  final int? id;
+  final String? id;
   final String name;
   final CategoryType type;
 
-  NewOrUpdateCategoryParams({
+  const NewOrUpdateCategoryParams({
     required this.id,
     required this.name,
     required this.type,

@@ -29,11 +29,11 @@ final class MemoryCache implements TransactionsLocalDataSource {
   }
 
   @override
-  Category getCategory(int id) {
+  Category getCategory(String id) {
     try {
       return _categories.firstWhere((category) => category.id == id);
     } on Exception {
-      throw ItemNotFoundInCache();
+      throw const ItemNotFoundInCache();
     }
   }
 
@@ -45,7 +45,7 @@ final class MemoryCache implements TransactionsLocalDataSource {
   void addCategory(Category category) => _categories.add(category);
 
   @override
-  void deleteCategory(int id) =>
+  void deleteCategory(String id) =>
       _categories.removeWhere((category) => category.id == id);
 
   @override
@@ -57,7 +57,7 @@ final class MemoryCache implements TransactionsLocalDataSource {
     try {
       return _transactions.firstWhere((transaction) => transaction.id == id);
     } on Exception {
-      throw ItemNotFoundInCache();
+      throw const ItemNotFoundInCache();
     }
   }
 

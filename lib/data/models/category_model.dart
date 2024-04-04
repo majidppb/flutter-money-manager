@@ -1,15 +1,22 @@
-class CategoryModel {
-  int id;
-  String name;
-  String type;
+final class CategoryModel {
+  final String user;
+  final String id;
+  final String name;
+  final bool isIncome;
 
-  CategoryModel({required this.id, required this.name, required this.type});
+  const CategoryModel(
+      {required this.user,
+      required this.id,
+      required this.name,
+      required this.isIncome});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-        id: json['id'] as int,
+        user: '',
+        id: json['id'] as String,
         name: json['name'] as String,
-        type: json['category'] as String,
+        isIncome: json['isIncome'] as bool,
       );
 
-  Map<String, dynamic> toJson() => {'id': id, 'name': name, 'category': type};
+  Map<String, dynamic> toJson() =>
+      {'user': user, 'id': id, 'name': name, 'isIncome': isIncome};
 }

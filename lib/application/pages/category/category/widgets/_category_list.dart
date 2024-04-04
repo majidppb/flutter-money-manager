@@ -1,7 +1,7 @@
 part of '../category.dart';
 
 class _CategoryList extends StatelessWidget {
-  final void Function(BuildContext context, {int? id}) onUpdate;
+  final void Function(BuildContext context, {String? id}) onUpdate;
   final List<Category> categories;
 
   const _CategoryList({required this.onUpdate, required this.categories});

@@ -1,14 +1,11 @@
-enum CategoryType {
-  income,
-  expense,
-}
+import '../enums/category_type.dart';
 
 final class Category {
-  final int id;
+  final String id;
   final String name;
   final CategoryType type;
 
-  Category({
+  const Category({
     required this.id,
     required this.name,
     required this.type,

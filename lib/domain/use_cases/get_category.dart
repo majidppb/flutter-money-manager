@@ -11,7 +11,7 @@ import 'params/get_category.dart';
 class GetCategory implements UseCase<Category, GetCategoryParams> {
   final TransactionsRepository _repo;
 
-  GetCategory(this._repo);
+  const GetCategory(this._repo);
 
   @override
   Future<Either<Failure, Category>> call(params) async {

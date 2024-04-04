@@ -9,7 +9,7 @@ import '../repositories/auth_service.dart';
 class SignOut implements UseCase<void, NoParams> {
   final AuthService _authService;
 
-  SignOut(this._authService);
+  const SignOut(this._authService);
 
   @override
   Future<Either<Failure, void>> call(_) async {

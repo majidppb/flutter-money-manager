@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../core/use_case.dart';
 import '../../../../../domain/entities/category.dart';
+import '../../../../../domain/enums/category_type.dart';
 import '../../../../../domain/use_cases/new_or_update_transaction.dart';
 import '../../../../../domain/use_cases/get_categories.dart';
 import '../../../../../domain/use_cases/get_transaction.dart';

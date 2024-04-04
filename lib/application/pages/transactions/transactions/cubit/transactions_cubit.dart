@@ -4,8 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/use_case.dart';
-import '../../../../../domain/entities/category.dart';
 import '../../../../../domain/entities/transaction.dart';
+import '../../../../../domain/enums/category_type.dart';
 import '../../../../../domain/use_cases/delete_transaction.dart';
 import '../../../../../domain/use_cases/get_transactions.dart';
 import '../../../../../domain/use_cases/params/delete_transaction.dart';

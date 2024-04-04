@@ -7,7 +7,7 @@ final class Transaction {
   final DateTime date;
   final Category category;
 
-  Transaction({
+  const Transaction({
     required this.id,
     required this.purpose,
     required this.amount,

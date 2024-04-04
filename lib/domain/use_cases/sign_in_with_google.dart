@@ -9,7 +9,7 @@ import '../repositories/auth_service.dart';
 class SignInWithGoogle implements UseCase<void, NoParams> {
   final AuthService _authService;
 
-  SignInWithGoogle(this._authService);
+  const SignInWithGoogle(this._authService);
 
   @override
   Future<Either<Failure, void>> call(_) async {

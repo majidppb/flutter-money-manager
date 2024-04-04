@@ -1,7 +1,7 @@
 import '../../../core/use_case.dart';
 
 final class DeleteCategoryParams extends Params {
-  final int id;
+  final String id;
 
-  DeleteCategoryParams({required this.id});
+  const DeleteCategoryParams({required this.id});
 }

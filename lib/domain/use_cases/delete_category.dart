@@ -10,7 +10,7 @@ import 'params/delete_category.dart';
 class DeleteCategory implements UseCase<void, DeleteCategoryParams> {
   final TransactionsRepository _repo;
 
-  DeleteCategory(this._repo);
+  const DeleteCategory(this._repo);
 
   @override
   Future<Either<Failure, void>> call(params) async {

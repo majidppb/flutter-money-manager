@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../domain/core/failure/failure.dart';
 import '../../domain/entities/category.dart';
 import '../../domain/entities/transaction.dart';
+import '../../domain/enums/category_type.dart';
 import '../../domain/repositories/transactions.dart';
 import '../data_sources/interfaces/transactions_local_data_source.dart';
 import '../data_sources/interfaces/transactions_remote_data_source.dart';
@@ -51,12 +52,13 @@ final class TransactionsRepositoryImpl
   }
 
   @override
-  Category getCategory(int id) {
+  Category getCategory(String id) {
     try {
       return _cache.getCategory(id);
     } on ItemNotFoundInCache {
       getCategories();
-      return Category(id: 0, name: 'unknown', type: CategoryType.expense);
+      return const Category(
+          id: '0', name: 'unknown', type: CategoryType.expense);
     }
   }
 
@@ -157,7 +159,7 @@ final class TransactionsRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, void>> deleteCategory(int id) async {
+  Future<Either<Failure, void>> deleteCategory(String id) async {
     try {
       await _remote.deleteCategory(id);
       _cache.deleteCategory(id);
