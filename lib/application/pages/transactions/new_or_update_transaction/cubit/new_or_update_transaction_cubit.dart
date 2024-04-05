@@ -10,7 +10,7 @@ import '../../../../../domain/use_cases/get_categories.dart';
 import '../../../../../domain/use_cases/get_transaction.dart';
 import '../../../../../domain/use_cases/params/new_or_update_transaction.dart';
 import '../../../../../domain/use_cases/params/get_transaction.dart';
-import '../../../core/new_or_update_status.dart';
+import '../../../core/utils/new_or_update_status.dart';
 
 part 'new_or_update_transaction_state.dart';
 part 'new_or_update_transaction_cubit.freezed.dart';

@@ -23,7 +23,8 @@ final class TransactionsRemoteDataSourceImpl
         .then(
           (result) => result.docs
               .map((e) => TransactionModel.fromJson(e.data()))
-              .toList(),
+              .toList()
+            ..sort((a, b) => b.date.compareTo(a.date)),
         );
   }
 

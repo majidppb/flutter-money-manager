@@ -5,8 +5,6 @@ enum NewOrUpdateStatus { editing, invalid, saving, saved, savingFailed }
 extension NewOrUpdateStatusChange on NewOrUpdateStatus {
   void snackBarNotify(BuildContext context) {
     switch (this) {
-      case NewOrUpdateStatus.editing:
-        return;
       case NewOrUpdateStatus.invalid:
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -16,18 +14,11 @@ extension NewOrUpdateStatusChange on NewOrUpdateStatus {
           ),
         );
         return;
-      case NewOrUpdateStatus.saving:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Saving ..'),
-            duration: Duration(seconds: 1),
-          ),
-        );
-        return;
+
       case NewOrUpdateStatus.saved:
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Transaction Saved !'),
+            content: Text('Saved !'),
             backgroundColor: Colors.green,
           ),
         );
@@ -41,6 +32,8 @@ extension NewOrUpdateStatusChange on NewOrUpdateStatus {
             showCloseIcon: true,
           ),
         );
+        return;
+      default:
         return;
     }
   }

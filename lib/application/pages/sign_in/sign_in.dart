@@ -22,14 +22,7 @@ class _SignInPage extends StatelessWidget {
   const _SignInPage();
 
   void _onStateChange(BuildContext context, SignInState state) {
-    if (state is SigningIn) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please wait; we are signing you in :)'),
-          duration: Duration(seconds: 1),
-        ),
-      );
-    } else if (state is Success) {
+    if (state is Success) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('You are successfully signed in.'),
@@ -38,7 +31,7 @@ class _SignInPage extends StatelessWidget {
       );
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const TransactionsPageProvider()));
-    } else {
+    } else if (state is Error) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Oops! Signing in failed.'),

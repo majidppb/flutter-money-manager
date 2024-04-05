@@ -6,7 +6,7 @@ import '../entities/app_user.dart';
 
 abstract interface class AuthService {
   bool get isSignedIn;
-  String get userId;
+  String? get userId;
   Future<Either<Failure, AppUser>> getUser();
   Future<Either<Failure, UserCredential>> signInWithGoogle();
   Future<Either<Failure, void>> signOut();

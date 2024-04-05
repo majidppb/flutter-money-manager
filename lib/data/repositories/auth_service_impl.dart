@@ -60,5 +60,5 @@ final class AuthServiceImpl with AppUserMapper implements AuthService {
   }
 
   @override
-  String get userId => FirebaseAuth.instance.currentUser!.uid;
+  String? get userId => FirebaseAuth.instance.currentUser?.uid;
 }

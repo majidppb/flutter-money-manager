@@ -17,7 +17,7 @@ mixin TransactionMapper {
 
   TransactionModel transactionEntityToModel(Transaction entity) {
     return TransactionModel(
-      user: getIt<AuthService>().userId,
+      user: getIt<AuthService>().userId!,
       id: entity.id,
       purpose: entity.purpose,
       amount: entity.amount,

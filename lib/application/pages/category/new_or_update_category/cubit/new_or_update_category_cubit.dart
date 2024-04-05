@@ -7,7 +7,7 @@ import '../../../../../domain/use_cases/get_category.dart';
 import '../../../../../domain/use_cases/new_or_update_category.dart';
 import '../../../../../domain/use_cases/params/get_category.dart';
 import '../../../../../domain/use_cases/params/new_or_update_category.dart';
-import '../../../core/new_or_update_status.dart';
+import '../../../core/utils/new_or_update_status.dart';
 
 part 'new_or_update_category_state.dart';
 part 'new_or_update_category_cubit.freezed.dart';

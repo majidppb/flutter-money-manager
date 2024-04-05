@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/injectable.dart';
 import '../../../../domain/enums/category_type.dart';
 import '../../../core/styles.dart';
-import '../../core/new_or_update_status.dart';
-import '../../core/utils/error.dart';
+import '../../core/utils/new_or_update_status.dart';
+import '../../core/widgets/error.dart';
 
 import 'cubit/new_or_update_category_cubit.dart';
 

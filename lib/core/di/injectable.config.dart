@@ -60,7 +60,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i4.TransactionsRemoteDataSourceImpl());
     gh.singleton<_i5.AuthService>(() => _i6.AuthServiceImpl());
     gh.factory<_i7.TransactionsLocalDataSource>(() => _i8.MemoryCache());
-    gh.singleton<_i9.TransactionsRepository>(
+    gh.lazySingleton<_i9.TransactionsRepository>(
         () => _i10.TransactionsRepositoryImpl(
               gh<_i3.TransactionsRemoteDataSource>(),
               gh<_i7.TransactionsLocalDataSource>(),

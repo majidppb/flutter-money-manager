@@ -34,7 +34,7 @@ class _CategoryList extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                context.read<CategoryCubit>().delete(context, category.id);
+                context.read<CategoryCubit>().delete(category.id);
                 Navigator.of(ctx).pop();
               },
               child: const Text('Delete'),

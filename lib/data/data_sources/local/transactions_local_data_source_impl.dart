@@ -11,7 +11,8 @@ final class MemoryCache implements TransactionsLocalDataSource {
   final _transactions = <Transaction>[];
 
   @override
-  List<Transaction> get getTransactions => _transactions;
+  List<Transaction> get getTransactions =>
+      _transactions..sort((a, b) => b.date.compareTo(a.date));
 
   @override
   void setTransactionsCache(List<Transaction> transactions) {

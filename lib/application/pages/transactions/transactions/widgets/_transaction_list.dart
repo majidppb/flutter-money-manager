@@ -19,9 +19,8 @@ class _TransactionListWidget extends StatelessWidget {
             motion: const BehindMotion(),
             children: [
               TextButton.icon(
-                onPressed: () => context
-                    .read<TransactionsCubit>()
-                    .delete(context, transaction.id),
+                onPressed: () =>
+                    context.read<TransactionsCubit>().delete(transaction.id),
                 icon: const Icon(Icons.delete_forever),
                 label: const Text('Delete'),
               )

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/category.dart';
 import '../../../core/styles.dart';
-import '../../core/utils/error.dart';
+import '../../core/widgets/error.dart';
 import '../../../../core/di/injectable.dart';
-import '../../core/utils/shimmer.dart';
-import '../../core/utils/skelton.dart';
+import '../../core/widgets/shimmer.dart';
+import '../../core/widgets/skelton.dart';
 import '../new_or_update_category/new_or_update_category.dart';
 import 'cubit/category_cubit.dart';
 

@@ -16,7 +16,7 @@ mixin CategoryMapper {
 
   CategoryModel categoryEntityToModel(Category entity) {
     return CategoryModel(
-      user: getIt<AuthService>().userId,
+      user: getIt<AuthService>().userId!,
       id: entity.id,
       name: entity.name,
       isIncome: entity.type == CategoryType.income,

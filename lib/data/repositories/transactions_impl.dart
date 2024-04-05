@@ -12,7 +12,7 @@ import '../data_sources/mapper/category.dart';
 import '../data_sources/mapper/transaction.dart';
 import '../exceptions/exceptions.dart';
 
-@Singleton(as: TransactionsRepository)
+@LazySingleton(as: TransactionsRepository)
 final class TransactionsRepositoryImpl
     with TransactionMapper, CategoryMapper
     implements TransactionsRepository {
