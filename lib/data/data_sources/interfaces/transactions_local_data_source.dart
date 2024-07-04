@@ -1,4 +1,5 @@
 import '../../../domain/entities/category.dart';
+import '../../../domain/entities/summary.dart';
 import '../../../domain/entities/transaction.dart';
 
 abstract interface class TransactionsLocalDataSource {
@@ -10,6 +11,8 @@ abstract interface class TransactionsLocalDataSource {
   void addTransaction(Transaction transaction);
   void updateTransaction(Transaction transaction);
   void deleteTransaction(String id);
+
+  Summary getSummary();
 
   // Category
   void setCategoriesCache(List<Category> categories);

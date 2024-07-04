@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingsState {
   AppUser get user => throw _privateConstructorUsedError;
   SettingsStatus get status => throw _privateConstructorUsedError;
+  Summary get summary => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsStateCopyWith<SettingsState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call({AppUser user, SettingsStatus status});
+  $Res call({AppUser user, SettingsStatus status, Summary summary});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   $Res call({
     Object? user = null,
     Object? status = null,
+    Object? summary = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -58,6 +60,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as SettingsStatus,
+      summary: null == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as Summary,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
       __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppUser user, SettingsStatus status});
+  $Res call({AppUser user, SettingsStatus status, Summary summary});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
     Object? status = null,
+    Object? summary = null,
   }) {
     return _then(_$SettingsStateImpl(
       user: null == user
@@ -96,6 +103,10 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as SettingsStatus,
+      summary: null == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as Summary,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SettingsStateImpl implements _SettingsState {
-  const _$SettingsStateImpl({required this.user, required this.status});
+  const _$SettingsStateImpl(
+      {required this.user, required this.status, required this.summary});
 
   @override
   final AppUser user;
   @override
   final SettingsStatus status;
+  @override
+  final Summary summary;
 
   @override
   String toString() {
-    return 'SettingsState(user: $user, status: $status)';
+    return 'SettingsState(user: $user, status: $status, summary: $summary)';
   }
 
   @override
@@ -121,11 +135,12 @@ class _$SettingsStateImpl implements _SettingsState {
         (other.runtimeType == runtimeType &&
             other is _$SettingsStateImpl &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.summary, summary) || other.summary == summary));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, status);
+  int get hashCode => Object.hash(runtimeType, user, status, summary);
 
   @JsonKey(ignore: true)
   @override
@@ -137,12 +152,15 @@ class _$SettingsStateImpl implements _SettingsState {
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
       {required final AppUser user,
-      required final SettingsStatus status}) = _$SettingsStateImpl;
+      required final SettingsStatus status,
+      required final Summary summary}) = _$SettingsStateImpl;
 
   @override
   AppUser get user;
   @override
   SettingsStatus get status;
+  @override
+  Summary get summary;
   @override
   @JsonKey(ignore: true)
   _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>

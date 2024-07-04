@@ -45,3 +45,4 @@ app.*.map.json
 # Ignore Sensitive Data
 /lib/firebase_options.dart
 /android/app/google-services.json
+firebase.json

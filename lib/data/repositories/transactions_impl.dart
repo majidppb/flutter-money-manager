@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/core/failure/failure.dart';
 import '../../domain/entities/category.dart';
+import '../../domain/entities/summary.dart';
 import '../../domain/entities/transaction.dart';
 import '../../domain/enums/category_type.dart';
 import '../../domain/repositories/transactions.dart';
@@ -177,6 +178,17 @@ final class TransactionsRepositoryImpl
       await _remote.updateCategory(categoryEntityToModel(category));
       _cache.updateCategory(category);
       return const Right(null);
+    } on ServerException {
+      return const Left(Failure.serverFailure());
+    } catch (_) {
+      return const Left(Failure.clientFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Summary>> getSummary() async {
+    try {
+      return Right(_cache.getSummary());
     } on ServerException {
       return const Left(Failure.serverFailure());
     } catch (_) {

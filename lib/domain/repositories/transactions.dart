@@ -1,5 +1,6 @@
 import 'package:dart_either/dart_either.dart';
 import '../core/failure/failure.dart';
+import '../entities/summary.dart';
 import '../entities/transaction.dart';
 
 import '../entities/category.dart';
@@ -11,6 +12,7 @@ abstract interface class TransactionsRepository {
   Future<Either<Failure, void>> addTransaction(Transaction transaction);
   Future<Either<Failure, void>> updateTransaction(Transaction transaction);
   Future<Either<Failure, void>> deleteTransaction(String id);
+  Future<Either<Failure, Summary>> getSummary();
 
   // Category
   Future<Either<Failure, List<Category>>> getCategories();

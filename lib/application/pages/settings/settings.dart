@@ -26,9 +26,10 @@ class _SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<SettingsCubit>().getUser(),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SettingsCubit>().getUser();
+      context.read<SettingsCubit>().getSummary();
+    });
 
     return BlocListener<SettingsCubit, SettingsState>(
       listener: _onSignOutUpdates,
@@ -38,9 +39,9 @@ class _SettingsPage extends StatelessWidget {
           title: const Text('Settings'),
         ),
         body: BlocBuilder<SettingsCubit, SettingsState>(
-          buildWhen: (previous, current) =>
-              current.status == SettingsStatus.initial ||
-              current.status == SettingsStatus.loaded,
+          // buildWhen: (previous, current) =>
+          //     current.status == SettingsStatus.initial ||
+          //     current.status == SettingsStatus.loaded,
           builder: (context, state) {
             if (state.status == SettingsStatus.initial) {
               return const SizedBox();
@@ -71,6 +72,38 @@ class _SettingsPage extends StatelessWidget {
                               ? NetworkImage(state.user.photo!)
                               : null,
                         )
+                      ],
+                    ),
+                    kHeight50,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Day'),
+                        Text(state.summary.day.toInt().toString()),
+                      ],
+                    ),
+                    kHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Week'),
+                        Text(state.summary.week.toInt().toString()),
+                      ],
+                    ),
+                    kHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Month'),
+                        Text(state.summary.month.toInt().toString()),
+                      ],
+                    ),
+                    kHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Total'),
+                        Text(state.summary.total.toInt().toString()),
                       ],
                     ),
                     const Spacer(),

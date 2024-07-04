@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/category.dart';
+import '../../../domain/entities/summary.dart';
 import '../../../domain/entities/transaction.dart';
 import '../../exceptions/exceptions.dart';
 import '../interfaces/transactions_local_data_source.dart';
@@ -76,5 +77,36 @@ final class MemoryCache implements TransactionsLocalDataSource {
         _transactions.indexWhere((element) => element.id == transaction.id);
     _transactions.removeAt(index);
     _transactions.insert(index, transaction);
+  }
+
+  @override
+  Summary getSummary() {
+    double total = 0;
+    double day = 0;
+    double week = 0;
+    double month = 0;
+
+    final today = DateTime.now();
+    final weekLImit = today.subtract(const Duration(days: 7));
+
+    for (final item in _transactions) {
+      total = total + item.amount;
+
+      if (item.date.day == today.day &&
+          item.date.month == today.month &&
+          item.date.year == today.year) {
+        day = day + item.amount;
+      }
+
+      if (item.date.month == today.month && item.date.year == today.year) {
+        month = month + item.amount;
+      }
+
+      if (item.date.isAfter(weekLImit)) {
+        week = week + item.amount;
+      }
+    }
+
+    return Summary(total: total, day: day, week: week, month: month);
   }
 }
