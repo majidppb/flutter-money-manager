@@ -29,7 +29,7 @@ class _SignInPage extends StatelessWidget {
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const TransactionsPageProvider()));
     } else if (state is Error) {
       ScaffoldMessenger.of(context).showSnackBar(

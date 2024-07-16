@@ -19,8 +19,6 @@ part 'widgets/_loading.dart';
 part 'widgets/_transaction_list.dart';
 
 class TransactionsPageProvider extends StatelessWidget {
-  static const icon = Hero(tag: 'transaction', child: Icon(Icons.list_rounded));
-
   const TransactionsPageProvider({super.key});
 
   @override
@@ -35,6 +33,19 @@ class TransactionsPageProvider extends StatelessWidget {
 class _TransactionsPage extends StatelessWidget {
   const _TransactionsPage();
 
+  /// Go to the NewOrUpdateTransaction Page.
+  /// Refresh the transactions if there are any changes.
+  void _onNewOrUpdate(BuildContext context, {String? id}) {
+    Navigator.of(context)
+        .push<bool>(MaterialPageRoute(
+            builder: (context) => NewOrUpdateTransactionProvider(id: id)))
+        .then((isRefreshNeeded) {
+      if (isRefreshNeeded == true) {
+        context.read<TransactionsCubit>().getAllTransactions();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
@@ -45,7 +56,6 @@ class _TransactionsPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          leading: TransactionsPageProvider.icon,
           title: const Text('Transactions'),
           actions: [
             IconButton(
@@ -92,25 +102,7 @@ class _TransactionsPage extends StatelessWidget {
             ],
           );
         }),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _onNewOrUpdate(context),
-          tooltip: 'New Transaction',
-          child: const Icon(Icons.add_rounded),
-        ),
       ),
     );
-  }
-
-  /// Go to the NewOrUpdateTransaction Page.
-  /// Refresh the transactions if there are any changes.
-  void _onNewOrUpdate(BuildContext context, {String? id}) {
-    Navigator.of(context)
-        .push<bool>(MaterialPageRoute(
-            builder: (context) => NewOrUpdateTransactionProvider(id: id)))
-        .then((isRefreshNeeded) {
-      if (isRefreshNeeded == true) {
-        context.read<TransactionsCubit>().getAllTransactions();
-      }
-    });
   }
 }
