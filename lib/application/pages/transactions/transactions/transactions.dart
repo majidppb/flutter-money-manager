@@ -8,7 +8,6 @@ import '../../../../domain/enums/category_type.dart';
 import '../../../core/colors.dart';
 import '../../category/category/category.dart';
 import '../../core/widgets/error.dart';
-import '../../../../core/di/injectable.dart';
 import '../../core/widgets/shimmer.dart';
 import '../../core/widgets/skelton.dart';
 import '../../settings/settings.dart';
@@ -23,10 +22,7 @@ class TransactionsPageProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<TransactionsCubit>(),
-      child: const _TransactionsPage(),
-    );
+    return const _TransactionsPage();
   }
 }
 
@@ -41,7 +37,7 @@ class _TransactionsPage extends StatelessWidget {
             builder: (context) => NewOrUpdateTransactionProvider(id: id)))
         .then((isRefreshNeeded) {
       if (isRefreshNeeded == true) {
-        context.read<TransactionsCubit>().getAllTransactions();
+        context.read<TransactionsCubit>().getAllTransactions(refresh: true);
       }
     });
   }

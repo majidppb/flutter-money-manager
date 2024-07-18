@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../../domain/entities/category.dart';
 import '../../../domain/entities/summary.dart';
 import '../../../domain/entities/transaction.dart';
@@ -6,7 +8,8 @@ abstract interface class TransactionsLocalDataSource {
   // Transaction
   void setTransactionsCache(List<Transaction> transactions);
 
-  List<Transaction> get getTransactions;
+  List<Transaction> getTransactions({DateTimeRange? range});
+  bool get isEmpty;
   Transaction getTransaction(String id);
   void addTransaction(Transaction transaction);
   void updateTransaction(Transaction transaction);

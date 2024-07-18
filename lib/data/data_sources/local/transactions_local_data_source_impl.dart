@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/category.dart';
@@ -12,8 +13,21 @@ final class MemoryCache implements TransactionsLocalDataSource {
   final _transactions = <Transaction>[];
 
   @override
-  List<Transaction> get getTransactions =>
-      _transactions..sort((a, b) => b.date.compareTo(a.date));
+  List<Transaction> getTransactions({DateTimeRange? range}) {
+    if (range == null) {
+      return _transactions..sort((a, b) => b.date.compareTo(a.date));
+    } else {
+      final newRange = DateTimeRange(
+          start: range.start.subtract(Durations.extralong4),
+          end: range.end.add(Durations.extralong4));
+      final result = _transactions
+          .where((e) =>
+              newRange.end.isAfter(e.date) && newRange.start.isBefore(e.date))
+          .toList();
+
+      return result..sort((a, b) => b.date.compareTo(a.date));
+    }
+  }
 
   @override
   void setTransactionsCache(List<Transaction> transactions) {
@@ -109,4 +123,7 @@ final class MemoryCache implements TransactionsLocalDataSource {
 
     return Summary(total: total, day: day, week: week, month: month);
   }
+
+  @override
+  get isEmpty => _transactions.isEmpty;
 }

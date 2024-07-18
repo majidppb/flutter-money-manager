@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/di/injectable.dart';
 import '../../core/styles.dart';
-import '../transactions/transactions/transactions.dart';
+import '../navbar/navbar.dart';
 import 'cubit/sign_in_cubit.dart';
 
 class SignInPageProvider extends StatelessWidget {
@@ -29,8 +29,8 @@ class _SignInPage extends StatelessWidget {
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const TransactionsPageProvider()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const NavBarPage()));
     } else if (state is Error) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

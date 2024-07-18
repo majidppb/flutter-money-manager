@@ -1,4 +1,4 @@
-final class CategoryModel {
+class CategoryModel {
   final String user;
   final String id;
   final String name;

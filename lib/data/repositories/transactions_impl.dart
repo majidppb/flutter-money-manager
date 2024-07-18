@@ -1,4 +1,5 @@
 import 'package:dart_either/dart_either.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/core/failure/failure.dart';
@@ -30,19 +31,17 @@ final class TransactionsRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, List<Transaction>>> getTransactions() async {
+  Future<Either<Failure, List<Transaction>>> getTransactions(
+      {DateTimeRange? range}) async {
     try {
-      // Check in the cache
-      final transactionsCache = _cache.getTransactions;
-      if (transactionsCache.isNotEmpty) {
-        return Right(transactionsCache);
+      if (_cache.isEmpty) {
+        final result = await _remote.getTransactions();
+        final transactions = result.map(transactionModelToEntity).toList();
+
+        _cache.setTransactionsCache(transactions);
       }
 
-      // Otherwise, load it from remote
-      final result = await _remote.getTransactions();
-      final transactions = result.map(transactionModelToEntity).toList();
-
-      _cache.setTransactionsCache(transactions);
+      final transactions = _cache.getTransactions(range: range);
 
       return Right(transactions);
     } on ServerException {

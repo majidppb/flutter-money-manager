@@ -46,7 +46,7 @@ class _NavBarPageState extends State<NavBarPage> {
             builder: (context) => NewOrUpdateTransactionProvider(id: id)))
         .then((isRefreshNeeded) {
       if (isRefreshNeeded == true) {
-        context.read<TransactionsCubit>().getAllTransactions();
+        context.read<TransactionsCubit>().getAllTransactions(refresh: true);
       }
     });
   }

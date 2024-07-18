@@ -1,4 +1,4 @@
-final class TransactionModel {
+class TransactionModel {
   final String user;
   final String id;
   final String purpose;

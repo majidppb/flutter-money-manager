@@ -1,4 +1,5 @@
 import 'package:dart_either/dart_either.dart';
+import 'package:flutter/material.dart';
 import '../core/failure/failure.dart';
 import '../entities/summary.dart';
 import '../entities/transaction.dart';
@@ -7,7 +8,8 @@ import '../entities/category.dart';
 
 abstract interface class TransactionsRepository {
   // Transaction
-  Future<Either<Failure, List<Transaction>>> getTransactions();
+  Future<Either<Failure, List<Transaction>>> getTransactions(
+      {DateTimeRange? range});
   Future<Either<Failure, Transaction>> getTransaction(String id);
   Future<Either<Failure, void>> addTransaction(Transaction transaction);
   Future<Either<Failure, void>> updateTransaction(Transaction transaction);
