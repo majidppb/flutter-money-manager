@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../statistics/statistics.dart';
 import '../transactions/new_or_update_transaction/new_or_update_transaction.dart.dart';
-import '../transactions/transactions/cubit/transactions_cubit.dart';
+import '../core/transactions_cubit/transactions_cubit.dart';
 import '../transactions/transactions/transactions.dart';
 
 class NavBarPage extends StatefulWidget {
@@ -22,8 +22,8 @@ class NavBarPage extends StatefulWidget {
 
   static const _pages = IndexedStack(
     children: [
-      StatisticsPageProvider(),
-      TransactionsPageProvider(),
+      StatisticsPage(),
+      TransactionsPage(),
     ],
   );
 

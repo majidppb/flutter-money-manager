@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/core/failure/failure.dart';
 import '../../domain/entities/category.dart';
+import '../../domain/entities/item_summary.dart';
 import '../../domain/entities/summary.dart';
 import '../../domain/entities/transaction.dart';
 import '../../domain/enums/category_type.dart';
@@ -31,7 +32,7 @@ final class TransactionsRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, List<Transaction>>> getTransactions(
+  Future<Either<Failure, Summary>> getTransactions(
       {DateTimeRange? range}) async {
     try {
       if (_cache.isEmpty) {
@@ -43,7 +44,60 @@ final class TransactionsRepositoryImpl
 
       final transactions = _cache.getTransactions(range: range);
 
-      return Right(transactions);
+      final List<ItemSummary> summaries = [];
+
+      double expense = 0;
+      double income = 0;
+
+      final List<Transaction> expenses = [];
+      final List<Transaction> incomes = [];
+
+      final categories = _cache.getCategories;
+
+      for (final e in transactions) {
+        if (e.category.type == CategoryType.expense) {
+          expenses.add(e);
+          expense = expense + e.amount;
+        } else {
+          incomes.add(e);
+          income = income + e.amount;
+        }
+      }
+
+      for (final e in categories) {
+        final items = transactions.where((t) => t.category == e);
+
+        double itemTotal = 0;
+
+        for (final t in items) {
+          itemTotal = itemTotal + t.amount;
+        }
+
+        if (itemTotal > 0) {
+          final percentage = e.type == CategoryType.expense
+              ? (itemTotal / expense) * 100
+              : (itemTotal / income) * 100;
+
+          final itemSummary = ItemSummary(
+            category: e,
+            amount: itemTotal,
+            percentage: percentage,
+          );
+
+          summaries.add(itemSummary);
+        }
+      }
+
+      return Right(
+        Summary(
+          range: range,
+          expenses: expenses,
+          incomes: incomes,
+          expense: expense,
+          income: income,
+          summaries: summaries,
+        ),
+      );
     } on ServerException {
       return const Left(Failure.serverFailure());
     } catch (_) {
@@ -177,17 +231,6 @@ final class TransactionsRepositoryImpl
       await _remote.updateCategory(categoryEntityToModel(category));
       _cache.updateCategory(category);
       return const Right(null);
-    } on ServerException {
-      return const Left(Failure.serverFailure());
-    } catch (_) {
-      return const Left(Failure.clientFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, Summary>> getSummary() async {
-    try {
-      return Right(_cache.getSummary());
     } on ServerException {
       return const Left(Failure.serverFailure());
     } catch (_) {

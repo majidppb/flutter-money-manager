@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../domain/entities/transaction.dart';
-import '../../../../../domain/enums/category_type.dart';
-import '../../../../../domain/use_cases/delete_transaction.dart';
-import '../../../../../domain/use_cases/get_transactions.dart';
-import '../../../../../domain/use_cases/params/delete_transaction.dart';
-import '../../../../../domain/use_cases/params/get_transactions.dart';
+import '../../../../domain/entities/summary.dart';
+import '../../../../domain/use_cases/delete_transaction.dart';
+import '../../../../domain/use_cases/get_transactions.dart';
+import '../../../../domain/use_cases/params/delete_transaction.dart';
+import '../../../../domain/use_cases/params/get_transactions.dart';
 
 part 'transactions_state.dart';
 part 'transactions_cubit.freezed.dart';
@@ -20,7 +19,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   static DateTimeRange? _prevRange;
 
   TransactionsCubit(this._getTransactions, this._deleteTransaction)
-      : super(const Loading());
+      : super(const TransactionsStateLoading());
 
   Future<void> getAllTransactions(
       {DateTimeRange? range, bool refresh = false}) async {
@@ -34,18 +33,9 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
     emit(
       result.fold(
-        ifLeft: (failure) => const Error(),
-        ifRight: (transactions) {
-          return Transactions(
-            expense: transactions
-                .where((transaction) =>
-                    transaction.category.type == CategoryType.expense)
-                .toList(),
-            income: transactions
-                .where((transaction) =>
-                    transaction.category.type == CategoryType.income)
-                .toList(),
-          );
+        ifLeft: (failure) => const TransactionsStateError(),
+        ifRight: (summary) {
+          return TransactionsStateLoaded(summary: summary);
         },
       ),
     );

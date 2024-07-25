@@ -5,7 +5,7 @@ import '../../core/di/injectable.dart';
 import '../../domain/repositories/auth_service.dart';
 import '../pages/navbar/navbar.dart';
 import '../pages/sign_in/sign_in.dart';
-import '../pages/transactions/transactions/cubit/transactions_cubit.dart';
+import '../pages/core/transactions_cubit/transactions_cubit.dart';
 import 'theme.dart' as theme;
 
 class MainApp extends StatelessWidget {

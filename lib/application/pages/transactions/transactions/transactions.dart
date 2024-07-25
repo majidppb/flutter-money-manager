@@ -12,22 +12,13 @@ import '../../core/widgets/shimmer.dart';
 import '../../core/widgets/skelton.dart';
 import '../../settings/settings.dart';
 import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
-import 'cubit/transactions_cubit.dart';
+import '../../core/transactions_cubit/transactions_cubit.dart';
 
 part 'widgets/_loading.dart';
 part 'widgets/_transaction_list.dart';
 
-class TransactionsPageProvider extends StatelessWidget {
-  const TransactionsPageProvider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const _TransactionsPage();
-  }
-}
-
-class _TransactionsPage extends StatelessWidget {
-  const _TransactionsPage();
+class TransactionsPage extends StatelessWidget {
+  const TransactionsPage({super.key});
 
   /// Go to the NewOrUpdateTransaction Page.
   /// Refresh the transactions if there are any changes.
@@ -75,11 +66,11 @@ class _TransactionsPage extends StatelessWidget {
         ),
         body: BlocBuilder<TransactionsCubit, TransactionsState>(
             builder: (context, state) {
-          if (state is Loading) {
+          if (state is TransactionsStateLoading) {
             return const _LoadingWidget();
           }
 
-          if (state is Error) {
+          if (state is TransactionsStateError) {
             return const CustomErrorWidget();
           }
 
@@ -87,12 +78,13 @@ class _TransactionsPage extends StatelessWidget {
             children: [
               _TransactionListWidget(
                 type: CategoryType.expense,
-                transactions: (state as Transactions).expense,
+                transactions:
+                    (state as TransactionsStateLoaded).summary.expenses,
                 onUpdate: _onNewOrUpdate,
               ),
               _TransactionListWidget(
                 type: CategoryType.income,
-                transactions: state.income,
+                transactions: state.summary.incomes,
                 onUpdate: _onNewOrUpdate,
               ),
             ],
