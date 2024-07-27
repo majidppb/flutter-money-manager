@@ -4,14 +4,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../domain/entities/item_summary.dart';
+import '../../../domain/enums/category_type.dart';
+import '../../core/colors.dart';
 import '../../core/styles.dart';
 import '../core/widgets/error.dart';
 import '../core/transactions_cubit/transactions_cubit.dart';
+import 'cubit/statistics_cubit.dart';
 
 part 'widgets/_bar_chart.dart';
+part 'widgets/_pie_chart.dart';
 
-class StatisticsPage extends StatelessWidget {
-  const StatisticsPage({super.key});
+class StatisticsPageProvider extends StatelessWidget {
+  const StatisticsPageProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => StatisticsCubit(),
+      child: const _StatisticsPage(),
+    );
+  }
+}
+
+class _StatisticsPage extends StatelessWidget {
+  const _StatisticsPage();
 
   void _selectRange(BuildContext context) {
     showModalBottomSheet(
@@ -178,8 +194,45 @@ class StatisticsPage extends StatelessWidget {
                   ),
                 ],
               ),
+              _PieChart(
+                income: state.summary.income,
+                expense: state.summary.expense,
+              ),
               const SizedBox(height: 250),
-              _BarChart(items: state.summary.summaries),
+              BlocBuilder<StatisticsCubit, StatisticsState>(
+                builder: (context, statisticsState) {
+                  final summaries = state.summary.summaries
+                      .where((e) => e.category.type == statisticsState.category)
+                      .toList();
+
+                  return _BarChart(items: summaries);
+                },
+              ),
+              kHeight30,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 80),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        context
+                            .read<StatisticsCubit>()
+                            .changeCategory(CategoryType.income);
+                      },
+                      child: const Text('Income'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        context
+                            .read<StatisticsCubit>()
+                            .changeCategory(CategoryType.expense);
+                      },
+                      child: const Text('Expense'),
+                    )
+                  ],
+                ),
+              ),
             ],
           );
         },

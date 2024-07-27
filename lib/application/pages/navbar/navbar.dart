@@ -22,7 +22,7 @@ class NavBarPage extends StatefulWidget {
 
   static const _pages = IndexedStack(
     children: [
-      StatisticsPage(),
+      StatisticsPageProvider(),
       TransactionsPage(),
     ],
   );

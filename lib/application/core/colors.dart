@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 const kAppSeedColor = Colors.teal;
 
-const kExpenseColor = Colors.blueGrey;
-const kIncomeColor = Color(0xFF515904);
+const kExpenseColor = Colors.indigo;
+const kIncomeColor = Colors.lightBlue; // Color(0xFF515904);
 
 // Shimmer
 const kShimmerLightBase = Colors.grey;

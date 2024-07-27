@@ -7,8 +7,9 @@ class _BarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.2,
+    return SizedBox(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.35,
       child: BarChart(
         BarChartData(
           barTouchData: BarTouchData(
