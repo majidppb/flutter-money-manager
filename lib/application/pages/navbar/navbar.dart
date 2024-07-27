@@ -15,8 +15,8 @@ class NavBarPage extends StatefulWidget {
       label: 'Home',
     ),
     NavigationDestination(
-      icon: Icon(Icons.track_changes),
-      label: 'Shifts',
+      icon: Icon(Icons.list),
+      label: 'Transactions',
     ),
   ];
 
