@@ -1,6 +1,7 @@
 # Money Manager
 
 - A basic money manager CRUD (Create, Read, Update, Delete) flutter app.
+- It provides a basic analysis of transactions using charts.
 - Built with [Firebase] Auth (Google Sign in) and Firestore.
 - Utilized [Bloc] for effective state management.
 - Follows the Clean architecture.
@@ -31,6 +32,10 @@ flutter run
  ## Screenshots
  <p align="center">
   <img src="screenshots/signin.jpg" alt="Sign in" width="200"/>
+  <br>
+  <img src="screenshots/statistics.jpg" alt="Sign in" width="200"/>
+  <br>
+  <img src="screenshots/date_range.jpg" alt="Sign in" width="200"/>
   <img src="screenshots/transactions_loading.jpg" alt="Transactions  Loading" width="200"/>
   <img src="screenshots/error_screen.jpg" alt="Error" width="200"/>
   <img src="screenshots/transactions.jpg" alt="Transactions" width="200"/>  

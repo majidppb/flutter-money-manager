@@ -8,115 +8,115 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:get_it/get_it.dart' as _i1;
-import 'package:injectable/injectable.dart' as _i2;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
 
 import '../../application/pages/category/category/cubit/category_cubit.dart'
-    as _i20;
+    as _i98;
 import '../../application/pages/category/new_or_update_category/cubit/new_or_update_category_cubit.dart'
-    as _i19;
+    as _i439;
 import '../../application/pages/core/transactions_cubit/transactions_cubit.dart'
-    as _i27;
-import '../../application/pages/settings/cubit/settings_cubit.dart' as _i26;
-import '../../application/pages/sign_in/cubit/sign_in_cubit.dart' as _i25;
+    as _i661;
+import '../../application/pages/settings/cubit/settings_cubit.dart' as _i267;
+import '../../application/pages/sign_in/cubit/sign_in_cubit.dart' as _i549;
 import '../../application/pages/transactions/new_or_update_transaction/cubit/new_or_update_transaction_cubit.dart'
-    as _i24;
+    as _i574;
 import '../../data/data_sources/interfaces/transactions_local_data_source.dart'
-    as _i7;
+    as _i505;
 import '../../data/data_sources/interfaces/transactions_remote_data_source.dart'
-    as _i3;
+    as _i607;
 import '../../data/data_sources/local/transactions_local_data_source_impl.dart'
-    as _i8;
+    as _i96;
 import '../../data/data_sources/remote/transactions_remote_data_source_impl.dart'
-    as _i4;
-import '../../data/repositories/auth_service_impl.dart' as _i6;
-import '../../data/repositories/transactions_impl.dart' as _i10;
-import '../../domain/repositories/auth_service.dart' as _i5;
-import '../../domain/repositories/transactions.dart' as _i9;
-import '../../domain/use_cases/delete_category.dart' as _i11;
-import '../../domain/use_cases/delete_transaction.dart' as _i12;
-import '../../domain/use_cases/get_categories.dart' as _i13;
-import '../../domain/use_cases/get_category.dart' as _i14;
-import '../../domain/use_cases/get_transaction.dart' as _i15;
-import '../../domain/use_cases/get_transactions.dart' as _i16;
-import '../../domain/use_cases/get_user.dart' as _i21;
-import '../../domain/use_cases/new_or_update_category.dart' as _i17;
-import '../../domain/use_cases/new_or_update_transaction.dart' as _i18;
-import '../../domain/use_cases/sign_in_with_google.dart' as _i22;
-import '../../domain/use_cases/singn_out.dart' as _i23;
+    as _i381;
+import '../../data/repositories/auth_service_impl.dart' as _i789;
+import '../../data/repositories/transactions_impl.dart' as _i295;
+import '../../domain/repositories/auth_service.dart' as _i1051;
+import '../../domain/repositories/transactions.dart' as _i1041;
+import '../../domain/use_cases/delete_category.dart' as _i951;
+import '../../domain/use_cases/delete_transaction.dart' as _i439;
+import '../../domain/use_cases/get_categories.dart' as _i212;
+import '../../domain/use_cases/get_category.dart' as _i261;
+import '../../domain/use_cases/get_transaction.dart' as _i881;
+import '../../domain/use_cases/get_transactions.dart' as _i522;
+import '../../domain/use_cases/get_user.dart' as _i832;
+import '../../domain/use_cases/new_or_update_category.dart' as _i609;
+import '../../domain/use_cases/new_or_update_transaction.dart' as _i862;
+import '../../domain/use_cases/sign_in_with_google.dart' as _i379;
+import '../../domain/use_cases/singn_out.dart' as _i648;
 
-extension GetItInjectableX on _i1.GetIt {
+extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i1.GetIt init({
+  _i174.GetIt init({
     String? environment,
-    _i2.EnvironmentFilter? environmentFilter,
+    _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i2.GetItHelper(
+    final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.TransactionsRemoteDataSource>(
-        () => _i4.TransactionsRemoteDataSourceImpl());
-    gh.singleton<_i5.AuthService>(() => _i6.AuthServiceImpl());
-    gh.factory<_i7.TransactionsLocalDataSource>(() => _i8.MemoryCache());
-    gh.lazySingleton<_i9.TransactionsRepository>(
-        () => _i10.TransactionsRepositoryImpl(
-              gh<_i3.TransactionsRemoteDataSource>(),
-              gh<_i7.TransactionsLocalDataSource>(),
+    gh.factory<_i607.TransactionsRemoteDataSource>(
+        () => _i381.TransactionsRemoteDataSourceImpl());
+    gh.singleton<_i1051.AuthService>(() => _i789.AuthServiceImpl());
+    gh.factory<_i505.TransactionsLocalDataSource>(() => _i96.MemoryCache());
+    gh.lazySingleton<_i1041.TransactionsRepository>(
+        () => _i295.TransactionsRepositoryImpl(
+              gh<_i607.TransactionsRemoteDataSource>(),
+              gh<_i505.TransactionsLocalDataSource>(),
             ));
-    gh.factory<_i11.DeleteCategory>(
-        () => _i11.DeleteCategory(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i12.DeleteTransaction>(
-        () => _i12.DeleteTransaction(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i13.GetCategories>(
-        () => _i13.GetCategories(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i14.GetCategory>(
-        () => _i14.GetCategory(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i15.GetTransaction>(
-        () => _i15.GetTransaction(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i16.GetTransactions>(
-        () => _i16.GetTransactions(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i17.NewOrUpdateCategory>(
-        () => _i17.NewOrUpdateCategory(gh<_i9.TransactionsRepository>()));
-    gh.factory<_i18.NewOrUpdateTransaction>(
-        () => _i18.NewOrUpdateTransaction(gh<_i9.TransactionsRepository>()));
-    gh.factoryParam<_i19.NewOrUpdateCategoryCubit, String?, dynamic>((
+    gh.factory<_i951.DeleteCategory>(
+        () => _i951.DeleteCategory(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i439.DeleteTransaction>(
+        () => _i439.DeleteTransaction(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i212.GetCategories>(
+        () => _i212.GetCategories(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i261.GetCategory>(
+        () => _i261.GetCategory(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i881.GetTransaction>(
+        () => _i881.GetTransaction(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i522.GetTransactions>(
+        () => _i522.GetTransactions(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i609.NewOrUpdateCategory>(
+        () => _i609.NewOrUpdateCategory(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i862.NewOrUpdateTransaction>(() =>
+        _i862.NewOrUpdateTransaction(gh<_i1041.TransactionsRepository>()));
+    gh.factoryParam<_i439.NewOrUpdateCategoryCubit, String?, dynamic>((
       id,
       _,
     ) =>
-        _i19.NewOrUpdateCategoryCubit(
-          gh<_i14.GetCategory>(),
-          gh<_i17.NewOrUpdateCategory>(),
+        _i439.NewOrUpdateCategoryCubit(
+          gh<_i261.GetCategory>(),
+          gh<_i609.NewOrUpdateCategory>(),
           id,
         ));
-    gh.factory<_i20.CategoryCubit>(() => _i20.CategoryCubit(
-          gh<_i13.GetCategories>(),
-          gh<_i11.DeleteCategory>(),
+    gh.factory<_i98.CategoryCubit>(() => _i98.CategoryCubit(
+          gh<_i212.GetCategories>(),
+          gh<_i951.DeleteCategory>(),
         ));
-    gh.factory<_i21.GetUser>(() => _i21.GetUser(gh<_i5.AuthService>()));
-    gh.factory<_i22.SignInWithGoogle>(
-        () => _i22.SignInWithGoogle(gh<_i5.AuthService>()));
-    gh.factory<_i23.SignOut>(() => _i23.SignOut(gh<_i5.AuthService>()));
-    gh.factoryParam<_i24.NewOrUpdateTransactionCubit, String?, dynamic>((
+    gh.factory<_i832.GetUser>(() => _i832.GetUser(gh<_i1051.AuthService>()));
+    gh.factory<_i379.SignInWithGoogle>(
+        () => _i379.SignInWithGoogle(gh<_i1051.AuthService>()));
+    gh.factory<_i648.SignOut>(() => _i648.SignOut(gh<_i1051.AuthService>()));
+    gh.factoryParam<_i574.NewOrUpdateTransactionCubit, String?, dynamic>((
       id,
       _,
     ) =>
-        _i24.NewOrUpdateTransactionCubit(
-          gh<_i13.GetCategories>(),
-          gh<_i18.NewOrUpdateTransaction>(),
-          gh<_i15.GetTransaction>(),
+        _i574.NewOrUpdateTransactionCubit(
+          gh<_i212.GetCategories>(),
+          gh<_i862.NewOrUpdateTransaction>(),
+          gh<_i881.GetTransaction>(),
           id,
         ));
-    gh.factory<_i25.SignInCubit>(
-        () => _i25.SignInCubit(gh<_i22.SignInWithGoogle>()));
-    gh.factory<_i26.SettingsCubit>(() => _i26.SettingsCubit(
-          gh<_i23.SignOut>(),
-          gh<_i21.GetUser>(),
+    gh.factory<_i549.SignInCubit>(
+        () => _i549.SignInCubit(gh<_i379.SignInWithGoogle>()));
+    gh.factory<_i267.SettingsCubit>(() => _i267.SettingsCubit(
+          gh<_i648.SignOut>(),
+          gh<_i832.GetUser>(),
         ));
-    gh.factory<_i27.TransactionsCubit>(() => _i27.TransactionsCubit(
-          gh<_i16.GetTransactions>(),
-          gh<_i12.DeleteTransaction>(),
+    gh.factory<_i661.TransactionsCubit>(() => _i661.TransactionsCubit(
+          gh<_i522.GetTransactions>(),
+          gh<_i439.DeleteTransaction>(),
         ));
     return this;
   }
