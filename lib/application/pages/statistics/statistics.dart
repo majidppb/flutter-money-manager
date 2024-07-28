@@ -121,6 +121,7 @@ class _StatisticsPage extends StatelessWidget {
         title: const Text('Money Manager'),
         actions: [
           IconButton(
+            tooltip: 'Pick a date range',
             onPressed: () => _selectRange(context),
             icon: const Icon(Icons.calendar_today),
           ),
@@ -198,23 +199,25 @@ class _StatisticsPage extends StatelessWidget {
                 income: state.summary.income,
                 expense: state.summary.expense,
               ),
-              const SizedBox(height: 250),
+              const SizedBox(height: 200),
               BlocBuilder<StatisticsCubit, StatisticsState>(
                 builder: (context, statisticsState) {
                   final summaries = state.summary.summaries
                       .where((e) => e.category.type == statisticsState.category)
                       .toList();
 
+                  summaries.sort((a, b) => a.amount.compareTo(b.amount));
+
                   return _BarChart(items: summaries);
                 },
               ),
               kHeight30,
               Padding(
-                padding: const EdgeInsets.only(bottom: 80),
+                padding: const EdgeInsets.only(bottom: 80, top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         context
                             .read<StatisticsCubit>()
@@ -222,7 +225,7 @@ class _StatisticsPage extends StatelessWidget {
                       },
                       child: const Text('Income'),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         context
                             .read<StatisticsCubit>()

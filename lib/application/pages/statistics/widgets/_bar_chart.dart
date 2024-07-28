@@ -9,56 +9,59 @@ class _BarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.35,
-      child: BarChart(
-        BarChartData(
-          barTouchData: BarTouchData(
-            touchTooltipData: BarTouchTooltipData(
-              getTooltipColor: (_) =>
-                  Theme.of(context).colorScheme.primaryContainer,
-              tooltipHorizontalAlignment: FLHorizontalAlignment.center,
-              getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                return BarTooltipItem(
-                  '${double.parse((_items[group.x].percentage).toStringAsFixed(2))}%',
-                  TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+      height: MediaQuery.of(context).size.height * 0.3,
+      child: _items.isEmpty
+          ? const Center(child: Text('No data to show!'))
+          : BarChart(
+              BarChartData(
+                barTouchData: BarTouchData(
+                  touchTooltipData: BarTouchTooltipData(
+                    getTooltipColor: (_) =>
+                        Theme.of(context).colorScheme.primaryContainer,
+                    tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+                    getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                      return BarTooltipItem(
+                        '${double.parse((_items[group.x].percentage).toStringAsFixed(2))}%',
+                        TextStyle(
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
-          titlesData: FlTitlesData(
-            show: true,
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: AxisTitles(
-              drawBelowEverything: false,
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: getTitles,
+                ),
+                titlesData: FlTitlesData(
+                  show: true,
+                  rightTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  topTitles: AxisTitles(
+                    drawBelowEverything: false,
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: getTitles,
+                    ),
+                  ),
+                  bottomTitles: AxisTitles(
+                    drawBelowEverything: false,
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: getAmount,
+                    ),
+                  ),
+                  leftTitles: const AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: false,
+                    ),
+                  ),
+                ),
+                borderData: FlBorderData(
+                  show: false,
+                ),
+                barGroups: showingGroups(context),
+                gridData: const FlGridData(show: false),
               ),
             ),
-            bottomTitles: AxisTitles(
-              drawBelowEverything: false,
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: getAmount,
-              ),
-            ),
-            leftTitles: const AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: false,
-              ),
-            ),
-          ),
-          borderData: FlBorderData(
-            show: false,
-          ),
-          barGroups: showingGroups(context),
-          gridData: const FlGridData(show: false),
-        ),
-      ),
     );
   }
 
@@ -107,7 +110,7 @@ class _BarChart extends StatelessWidget {
       space: 0,
       angle: 1.5708,
       child: Transform.translate(
-          offset: const Offset(-120, 0),
+          offset: const Offset(-110, 0),
           child: Text(_items[value.toInt()].category.name)),
     );
   }
@@ -116,8 +119,10 @@ class _BarChart extends StatelessWidget {
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 0,
-      // angle: 1.5708,
-      child: Text(_items[value.toInt()].amount.toInt().toString()),
+      angle: 1.5708,
+      child: Transform.translate(
+          offset: const Offset(20, 0),
+          child: Text(_items[value.toInt()].amount.toInt().toString())),
     );
   }
 }

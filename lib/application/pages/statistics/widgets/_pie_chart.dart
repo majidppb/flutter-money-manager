@@ -14,56 +14,49 @@ class _PieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AspectRatio(
-          aspectRatio: 1.3,
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: PieChart(
-              PieChartData(
-                borderData: FlBorderData(
-                  show: false,
-                ),
-                sectionsSpace: 0,
-                centerSpaceRadius: 0,
-                sections: [
-                  PieChartSectionData(
-                    color: kExpenseColor,
-                    value: expense,
-                    title: balance > 0
-                        ? '${(expense / income * 100).toStringAsFixed(2)}%'
-                        : '100%',
-                    radius: radius,
-                    titleStyle: const TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xffffffff),
-                      shadows: shadows,
-                    ),
-                    badgeWidget: const Text('Expense'),
-                    badgePositionPercentageOffset: 1.25,
-                  ),
-                  PieChartSectionData(
-                    color: kIncomeColor,
-                    value: balance,
-                    title: '${(balance / income * 100).toStringAsFixed(2)}%',
-                    radius: radius,
-                    titleStyle: const TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xffffffff),
-                      shadows: shadows,
-                    ),
-                    badgeWidget: const Text('Balance'),
-                    badgePositionPercentageOffset: 1.25,
-                  ),
-                ],
-              ),
-            ),
+    return AspectRatio(
+      aspectRatio: 1.4,
+      child: PieChart(
+        PieChartData(
+          borderData: FlBorderData(
+            show: false,
           ),
+          sectionsSpace: 0,
+          centerSpaceRadius: 0,
+          sections: [
+            PieChartSectionData(
+              color: kExpenseColor,
+              value: expense,
+              title: balance > 0
+                  ? '${(expense / income * 100).toStringAsFixed(2)}%'
+                  : '100%',
+              radius: radius,
+              titleStyle: const TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffffffff),
+                shadows: shadows,
+              ),
+              badgeWidget: const Text('Expense'),
+              badgePositionPercentageOffset: 1.25,
+            ),
+            PieChartSectionData(
+              color: kIncomeColor,
+              value: balance,
+              title: '${(balance / income * 100).toStringAsFixed(2)}%',
+              radius: radius,
+              titleStyle: const TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffffffff),
+                shadows: shadows,
+              ),
+              badgeWidget: const Text('Balance'),
+              badgePositionPercentageOffset: 1.25,
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
