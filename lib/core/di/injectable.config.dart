@@ -23,6 +23,8 @@ import '../../application/pages/transactions/filter/cubit/filter_cubit.dart'
     as _i123;
 import '../../application/pages/transactions/new_or_update_transaction/cubit/new_or_update_transaction_cubit.dart'
     as _i574;
+import '../../application/pages/transactions/search/cubit/search_cubit.dart'
+    as _i780;
 import '../../data/data_sources/interfaces/transactions_local_data_source.dart'
     as _i505;
 import '../../data/data_sources/interfaces/transactions_remote_data_source.dart'
@@ -44,6 +46,7 @@ import '../../domain/use_cases/get_transactions.dart' as _i522;
 import '../../domain/use_cases/get_user.dart' as _i832;
 import '../../domain/use_cases/new_or_update_category.dart' as _i609;
 import '../../domain/use_cases/new_or_update_transaction.dart' as _i862;
+import '../../domain/use_cases/search_transaction.dart' as _i880;
 import '../../domain/use_cases/sign_in_with_google.dart' as _i379;
 import '../../domain/use_cases/singn_out.dart' as _i648;
 
@@ -83,6 +86,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i609.NewOrUpdateCategory(gh<_i1041.TransactionsRepository>()));
     gh.factory<_i862.NewOrUpdateTransaction>(() =>
         _i862.NewOrUpdateTransaction(gh<_i1041.TransactionsRepository>()));
+    gh.factory<_i880.SearchTransaction>(
+        () => _i880.SearchTransaction(gh<_i1041.TransactionsRepository>()));
     gh.factoryParam<_i439.NewOrUpdateCategoryCubit, String?, dynamic>((
       id,
       _,
@@ -110,6 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i881.GetTransaction>(),
           id,
         ));
+    gh.factory<_i780.SearchCubit>(
+        () => _i780.SearchCubit(gh<_i880.SearchTransaction>()));
     gh.factory<_i549.SignInCubit>(
         () => _i549.SignInCubit(gh<_i379.SignInWithGoogle>()));
     gh.factory<_i267.SettingsCubit>(() => _i267.SettingsCubit(

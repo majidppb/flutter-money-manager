@@ -94,4 +94,12 @@ final class MemoryCache implements TransactionsLocalDataSource {
 
   @override
   get isEmpty => _transactions.isEmpty;
+
+  @override
+  List<Transaction> searchTransaction(String query) {
+    final q = query.toLowerCase();
+    return _transactions
+        .where((e) => e.purpose.toLowerCase().contains(q))
+        .toList();
+  }
 }

@@ -37,7 +37,6 @@ class FilterCubit extends Cubit<FilterState> {
       FilterState(
         transactions:
             transactions.where((e) => e.category == category).toList(),
-        type: category.type,
       ),
     );
   }

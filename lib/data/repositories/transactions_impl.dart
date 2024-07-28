@@ -237,4 +237,10 @@ final class TransactionsRepositoryImpl
       return const Left(Failure.clientFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<Transaction>>> searchTransaction(
+      String query) async {
+    return Right(_cache.searchTransaction(query));
+  }
 }

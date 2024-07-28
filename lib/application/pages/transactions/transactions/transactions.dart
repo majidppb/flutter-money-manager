@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/transaction.dart';
-import '../../../../domain/enums/category_type.dart';
 import '../../category/category/category.dart';
 import '../../core/widgets/error.dart';
 import '../../core/widgets/shimmer.dart';
@@ -11,6 +10,7 @@ import '../../settings/settings.dart';
 import '../filter/widgets/filter_bottom_sheet.dart';
 import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
 import '../../core/transactions_cubit/transactions_cubit.dart';
+import '../search/search.dart';
 import '../widgets/transaction_list.dart';
 
 part 'widgets/_loading.dart';
@@ -71,7 +71,15 @@ class TransactionsPage extends StatelessWidget {
                 icon: const Icon(Icons.filter_alt_rounded),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SearchPageProvider(onUpdate: _onNewOrUpdate);
+                      },
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.search_rounded),
               ),
             ],
@@ -109,13 +117,11 @@ class TransactionsPage extends StatelessWidget {
           return TabBarView(
             children: [
               TransactionListWidget(
-                type: CategoryType.expense,
                 transactions:
                     (state as TransactionsStateLoaded).summary.expenses,
                 onUpdate: _onNewOrUpdate,
               ),
               TransactionListWidget(
-                type: CategoryType.income,
                 transactions: state.summary.incomes,
                 onUpdate: _onNewOrUpdate,
               ),

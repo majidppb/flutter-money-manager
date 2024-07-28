@@ -9,15 +9,11 @@ import '../../../core/colors.dart';
 import '../../core/transactions_cubit/transactions_cubit.dart';
 
 class TransactionListWidget extends StatelessWidget {
-  final CategoryType type;
   final void Function(BuildContext context, {String? id}) onUpdate;
   final List<Transaction> transactions;
 
   const TransactionListWidget(
-      {super.key,
-      required this.type,
-      required this.transactions,
-      required this.onUpdate});
+      {super.key, required this.transactions, required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,9 @@ class TransactionListWidget extends StatelessWidget {
             onTap: () => onUpdate(context, id: transaction.id),
             leading: CircleAvatar(
                 backgroundColor:
-                    type == CategoryType.expense ? kExpenseColor : kIncomeColor,
+                    transaction.category.type == CategoryType.expense
+                        ? kExpenseColor
+                        : kIncomeColor,
                 radius: 50,
                 child: Text(
                   DateFormat.MMMd().format(transaction.date),

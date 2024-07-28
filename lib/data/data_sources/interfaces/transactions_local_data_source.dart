@@ -13,6 +13,7 @@ abstract interface class TransactionsLocalDataSource {
   void addTransaction(Transaction transaction);
   void updateTransaction(Transaction transaction);
   void deleteTransaction(String id);
+  List<Transaction> searchTransaction(String query);
 
   // Category
   void setCategoriesCache(List<Category> categories);

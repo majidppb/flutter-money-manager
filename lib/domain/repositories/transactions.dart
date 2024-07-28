@@ -12,6 +12,7 @@ abstract interface class TransactionsRepository {
   Future<Either<Failure, void>> addTransaction(Transaction transaction);
   Future<Either<Failure, void>> updateTransaction(Transaction transaction);
   Future<Either<Failure, void>> deleteTransaction(String id);
+  Future<Either<Failure, List<Transaction>>> searchTransaction(String query);
 
   // Category
   Future<Either<Failure, List<Category>>> getCategories();

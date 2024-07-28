@@ -41,7 +41,6 @@ class _FilterTransactionsPage extends StatelessWidget {
         return Scaffold(
           body: state.transactions.isNotEmpty
               ? TransactionListWidget(
-                  type: state.type!,
                   transactions: state.transactions,
                   onUpdate: onUpdate,
                 )
