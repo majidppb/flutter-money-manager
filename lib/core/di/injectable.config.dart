@@ -19,6 +19,8 @@ import '../../application/pages/core/transactions_cubit/transactions_cubit.dart'
     as _i661;
 import '../../application/pages/settings/cubit/settings_cubit.dart' as _i267;
 import '../../application/pages/sign_in/cubit/sign_in_cubit.dart' as _i549;
+import '../../application/pages/transactions/filter/cubit/filter_cubit.dart'
+    as _i123;
 import '../../application/pages/transactions/new_or_update_transaction/cubit/new_or_update_transaction_cubit.dart'
     as _i574;
 import '../../data/data_sources/interfaces/transactions_local_data_source.dart'
@@ -114,6 +116,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i648.SignOut>(),
           gh<_i832.GetUser>(),
         ));
+    gh.factory<_i123.FilterCubit>(
+        () => _i123.FilterCubit(gh<_i212.GetCategories>()));
     gh.factory<_i661.TransactionsCubit>(() => _i661.TransactionsCubit(
           gh<_i522.GetTransactions>(),
           gh<_i439.DeleteTransaction>(),

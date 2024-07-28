@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../domain/entities/transaction.dart';
 import '../../../../domain/enums/category_type.dart';
-import '../../../core/colors.dart';
 import '../../category/category/category.dart';
 import '../../core/widgets/error.dart';
 import '../../core/widgets/shimmer.dart';
 import '../../core/widgets/skelton.dart';
 import '../../settings/settings.dart';
+import '../filter/widgets/filter_bottom_sheet.dart';
 import '../new_or_update_transaction/new_or_update_transaction.dart.dart';
 import '../../core/transactions_cubit/transactions_cubit.dart';
+import '../widgets/transaction_list.dart';
 
 part 'widgets/_loading.dart';
-part 'widgets/_transaction_list.dart';
 
 class TransactionsPage extends StatelessWidget {
   const TransactionsPage({super.key});
@@ -43,7 +41,41 @@ class TransactionsPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Transactions'),
+          leadingWidth: 100,
+          leading: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      final transactions = context
+                              .read<TransactionsCubit>()
+                              .state is TransactionsStateLoaded
+                          ? (context.read<TransactionsCubit>().state
+                                      as TransactionsStateLoaded)
+                                  .summary
+                                  .expenses +
+                              (context.read<TransactionsCubit>().state
+                                      as TransactionsStateLoaded)
+                                  .summary
+                                  .incomes
+                          : const <Transaction>[];
+                      return FilterBottomSheetWidget(
+                        onUpdate: _onNewOrUpdate,
+                        transactions: transactions,
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.filter_alt_rounded),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.search_rounded),
+              ),
+            ],
+          ),
           actions: [
             IconButton(
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
@@ -55,7 +87,7 @@ class TransactionsPage extends StatelessWidget {
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const SettingsProvider())),
               icon: SettingsProvider.icon,
-            )
+            ),
           ],
           bottom: const TabBar(
             tabs: [
@@ -76,13 +108,13 @@ class TransactionsPage extends StatelessWidget {
 
           return TabBarView(
             children: [
-              _TransactionListWidget(
+              TransactionListWidget(
                 type: CategoryType.expense,
                 transactions:
                     (state as TransactionsStateLoaded).summary.expenses,
                 onUpdate: _onNewOrUpdate,
               ),
-              _TransactionListWidget(
+              TransactionListWidget(
                 type: CategoryType.income,
                 transactions: state.summary.incomes,
                 onUpdate: _onNewOrUpdate,

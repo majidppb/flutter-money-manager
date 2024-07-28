@@ -1,12 +1,23 @@
-part of '../transactions.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 
-class _TransactionListWidget extends StatelessWidget {
+import '../../../../domain/entities/transaction.dart';
+import '../../../../domain/enums/category_type.dart';
+import '../../../core/colors.dart';
+import '../../core/transactions_cubit/transactions_cubit.dart';
+
+class TransactionListWidget extends StatelessWidget {
   final CategoryType type;
   final void Function(BuildContext context, {String? id}) onUpdate;
   final List<Transaction> transactions;
 
-  const _TransactionListWidget(
-      {required this.type, required this.transactions, required this.onUpdate});
+  const TransactionListWidget(
+      {super.key,
+      required this.type,
+      required this.transactions,
+      required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
