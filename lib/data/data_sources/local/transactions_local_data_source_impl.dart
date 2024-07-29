@@ -17,11 +17,26 @@ final class MemoryCache implements TransactionsLocalDataSource {
       return _transactions..sort((a, b) => b.date.compareTo(a.date));
     } else {
       final newRange = DateTimeRange(
-          start: range.start.subtract(Durations.extralong4),
-          end: range.end.add(Durations.extralong4));
+        start: DateTime(
+          range.start.year,
+          range.start.month,
+          range.start.day,
+        ).subtract(Durations.extralong4),
+        end: DateTime(
+          range.end.year,
+          range.end.month,
+          range.end.day,
+          23,
+          59,
+          59,
+          999,
+          999,
+        ).add(Durations.extralong4),
+      );
+
       final result = _transactions
           .where((e) =>
-              newRange.end.isAfter(e.date) && newRange.start.isBefore(e.date))
+              e.date.isAfter(newRange.start) & e.date.isBefore(newRange.end))
           .toList();
 
       return result..sort((a, b) => b.date.compareTo(a.date));

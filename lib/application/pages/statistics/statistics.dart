@@ -49,10 +49,11 @@ class _StatisticsPage extends StatelessWidget {
             ListTile(
               title: const Text('Today'),
               onTap: () {
+                final today = DateTime.now();
                 context.read<TransactionsCubit>().getAllTransactions(
                       range: DateTimeRange(
-                        start: DateTime.now(),
-                        end: DateTime.now(),
+                        start: today,
+                        end: today,
                       ),
                       refresh: true,
                     );
@@ -63,10 +64,11 @@ class _StatisticsPage extends StatelessWidget {
             ListTile(
               title: const Text('This week'),
               onTap: () {
+                final today = DateTime.now();
                 context.read<TransactionsCubit>().getAllTransactions(
                     range: DateTimeRange(
-                      start: DateTime.now().subtract(const Duration(days: 7)),
-                      end: DateTime.now(),
+                      start: today.subtract(const Duration(days: 6)),
+                      end: today,
                     ),
                     refresh: true);
 
@@ -76,10 +78,11 @@ class _StatisticsPage extends StatelessWidget {
             ListTile(
               title: const Text('This month'),
               onTap: () {
+                final today = DateTime.now();
                 context.read<TransactionsCubit>().getAllTransactions(
                     range: DateTimeRange(
-                      start: DateTime.now().subtract(const Duration(days: 30)),
-                      end: DateTime.now(),
+                      start: today.subtract(const Duration(days: 29)),
+                      end: today,
                     ),
                     refresh: true);
 
