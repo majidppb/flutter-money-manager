@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -7,6 +8,7 @@ import '../../../../../domain/use_cases/get_category.dart';
 import '../../../../../domain/use_cases/new_or_update_category.dart';
 import '../../../../../domain/use_cases/params/get_category.dart';
 import '../../../../../domain/use_cases/params/new_or_update_category.dart';
+import '../../../../core/colors.dart';
 import '../../../core/utils/new_or_update_status.dart';
 
 part 'new_or_update_category_state.dart';
@@ -35,14 +37,19 @@ class NewOrUpdateCategoryCubit extends Cubit<NewOrUpdateCategoryState> {
           ifRight: (category) => Loaded(
             name: category.name,
             type: category.type,
+            color: category.color,
           ),
         ),
       );
     }
   }
 
-  void valueChanged({CategoryType? type}) =>
-      emit((state as Loaded).copyWith(type: type ?? (state as Loaded).type));
+  void valueChanged({CategoryType? type, Color? color}) => emit(
+        (state as Loaded).copyWith(
+          type: type ?? (state as Loaded).type,
+          color: color ?? (state as Loaded).color,
+        ),
+      );
 
   Future<void> save({required String? name}) async {
     if (name != null && (state as Loaded).type != null) {
@@ -55,6 +62,7 @@ class NewOrUpdateCategoryCubit extends Cubit<NewOrUpdateCategoryState> {
           id: id,
           name: name,
           type: (state as Loaded).type!,
+          color: (state as Loaded).color,
         ),
       );
 

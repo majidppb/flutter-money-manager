@@ -16,7 +16,7 @@ class _BarChart extends StatelessWidget {
               BarChartData(
                 barTouchData: BarTouchData(
                   touchTooltipData: BarTouchTooltipData(
-                    getTooltipColor: (_) =>
+                    getTooltipColor: (group) =>
                         Theme.of(context).colorScheme.primaryContainer,
                     tooltipHorizontalAlignment: FLHorizontalAlignment.center,
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -77,7 +77,7 @@ class _BarChart extends StatelessWidget {
       barRods: [
         BarChartRodData(
           toY: y,
-          color: Theme.of(context).colorScheme.secondary,
+          color: _items[x].category.color,
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,

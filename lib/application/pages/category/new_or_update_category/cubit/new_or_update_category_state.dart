@@ -10,5 +10,6 @@ class NewOrUpdateCategoryState with _$NewOrUpdateCategoryState {
     @Default(NewOrUpdateStatus.editing) final NewOrUpdateStatus status,
     final String? name,
     final CategoryType? type,
+    @Default(kDefaultNewCategoryColor) final Color color,
   }) = Loaded;
 }

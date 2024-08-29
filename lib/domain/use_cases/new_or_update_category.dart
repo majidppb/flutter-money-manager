@@ -21,6 +21,7 @@ class NewOrUpdateCategory implements UseCase<void, NewOrUpdateCategoryParams> {
         id: params.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
         name: params.name,
         type: params.type,
+        color: params.color,
       );
 
       return params.id == null

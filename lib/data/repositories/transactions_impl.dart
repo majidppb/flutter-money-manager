@@ -2,6 +2,7 @@ import 'package:dart_either/dart_either.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../application/core/colors.dart';
 import '../../domain/core/failure/failure.dart';
 import '../../domain/entities/category.dart';
 import '../../domain/entities/item_summary.dart';
@@ -112,7 +113,11 @@ final class TransactionsRepositoryImpl
     } on ItemNotFoundInCache {
       getCategories();
       return const Category(
-          id: '0', name: 'unknown', type: CategoryType.expense);
+        id: '0',
+        name: 'unknown',
+        type: CategoryType.expense,
+        color: kExpenseColor,
+      );
     }
   }
 

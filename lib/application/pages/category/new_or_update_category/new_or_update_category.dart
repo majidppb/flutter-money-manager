@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../../core/di/injectable.dart';
 import '../../../../domain/enums/category_type.dart';
+import '../../../core/colors.dart';
 import '../../../core/styles.dart';
 import '../../core/utils/new_or_update_status.dart';
 import '../../core/widgets/error.dart';
@@ -66,8 +68,7 @@ class _NewOrUpdateCategoryPageState extends State<_NewOrUpdateCategoryPage> {
               return const CustomErrorWidget();
             }
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            return ListView(
               children: [
                 // Title
                 Text(
@@ -128,6 +129,32 @@ class _NewOrUpdateCategoryPageState extends State<_NewOrUpdateCategoryPage> {
                   },
                 ),
 
+                kHeight10,
+
+                const Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: Text('Pick a color :'),
+                ),
+
+                ColorPicker(
+                  paletteType: PaletteType.hueWheel,
+                  enableAlpha: false,
+                  hexInputBar: true,
+                  labelTypes: const [],
+                  colorPickerWidth: 220,
+                  pickerColor:
+                      (context.read<NewOrUpdateCategoryCubit>().state is Loaded)
+                          ? (context.read<NewOrUpdateCategoryCubit>().state
+                                  as Loaded)
+                              .color
+                          : kDefaultNewCategoryColor,
+                  onColorChanged: (color) {
+                    context
+                        .read<NewOrUpdateCategoryCubit>()
+                        .valueChanged(color: color);
+                  },
+                ),
+
                 kHeight50,
 
                 // Submit
@@ -148,7 +175,7 @@ class _NewOrUpdateCategoryPageState extends State<_NewOrUpdateCategoryPage> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             );
           },

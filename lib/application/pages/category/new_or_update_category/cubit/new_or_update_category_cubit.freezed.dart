@@ -20,8 +20,8 @@ mixin _$NewOrUpdateCategoryState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)
+    required TResult Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +29,8 @@ mixin _$NewOrUpdateCategoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult? Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ mixin _$NewOrUpdateCategoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult Function(NewOrUpdateStatus status, String? name, CategoryType? type,
+            Color color)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -127,8 +127,8 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)
+    required TResult Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)
         loaded,
   }) {
     return loading();
@@ -139,8 +139,8 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult? Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)?
         loaded,
   }) {
     return loading?.call();
@@ -151,8 +151,8 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult Function(NewOrUpdateStatus status, String? name, CategoryType? type,
+            Color color)?
         loaded,
     required TResult orElse(),
   }) {
@@ -241,8 +241,8 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)
+    required TResult Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)
         loaded,
   }) {
     return error();
@@ -253,8 +253,8 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult? Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)?
         loaded,
   }) {
     return error?.call();
@@ -265,8 +265,8 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult Function(NewOrUpdateStatus status, String? name, CategoryType? type,
+            Color color)?
         loaded,
     required TResult orElse(),
   }) {
@@ -321,7 +321,11 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({NewOrUpdateStatus status, String? name, CategoryType? type});
+  $Res call(
+      {NewOrUpdateStatus status,
+      String? name,
+      CategoryType? type,
+      Color color});
 }
 
 /// @nodoc
@@ -338,6 +342,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
     Object? status = null,
     Object? name = freezed,
     Object? type = freezed,
+    Object? color = null,
   }) {
     return _then(_$LoadedImpl(
       status: null == status
@@ -352,6 +357,10 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as CategoryType?,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -360,7 +369,10 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements Loaded {
   const _$LoadedImpl(
-      {this.status = NewOrUpdateStatus.editing, this.name, this.type});
+      {this.status = NewOrUpdateStatus.editing,
+      this.name,
+      this.type,
+      this.color = kDefaultNewCategoryColor});
 
   @override
   @JsonKey()
@@ -369,10 +381,13 @@ class _$LoadedImpl implements Loaded {
   final String? name;
   @override
   final CategoryType? type;
+  @override
+  @JsonKey()
+  final Color color;
 
   @override
   String toString() {
-    return 'NewOrUpdateCategoryState.loaded(status: $status, name: $name, type: $type)';
+    return 'NewOrUpdateCategoryState.loaded(status: $status, name: $name, type: $type, color: $color)';
   }
 
   @override
@@ -382,11 +397,12 @@ class _$LoadedImpl implements Loaded {
             other is _$LoadedImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, name, type);
+  int get hashCode => Object.hash(runtimeType, status, name, type, color);
 
   @JsonKey(ignore: true)
   @override
@@ -399,11 +415,11 @@ class _$LoadedImpl implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)
+    required TResult Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)
         loaded,
   }) {
-    return loaded(status, name, type);
+    return loaded(status, name, type, color);
   }
 
   @override
@@ -411,11 +427,11 @@ class _$LoadedImpl implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult? Function(NewOrUpdateStatus status, String? name,
+            CategoryType? type, Color color)?
         loaded,
   }) {
-    return loaded?.call(status, name, type);
+    return loaded?.call(status, name, type, color);
   }
 
   @override
@@ -423,13 +439,13 @@ class _$LoadedImpl implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(
-            NewOrUpdateStatus status, String? name, CategoryType? type)?
+    TResult Function(NewOrUpdateStatus status, String? name, CategoryType? type,
+            Color color)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(status, name, type);
+      return loaded(status, name, type, color);
     }
     return orElse();
   }
@@ -473,11 +489,13 @@ abstract class Loaded implements NewOrUpdateCategoryState {
   const factory Loaded(
       {final NewOrUpdateStatus status,
       final String? name,
-      final CategoryType? type}) = _$LoadedImpl;
+      final CategoryType? type,
+      final Color color}) = _$LoadedImpl;
 
   NewOrUpdateStatus get status;
   String? get name;
   CategoryType? get type;
+  Color get color;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
