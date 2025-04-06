@@ -88,23 +88,24 @@ class _NewOrUpdateTransactionPageState
 
                 kHeight30,
 
+                // Amount
+                TextFormField(
+                  controller: _amountController,
+                  autofocus: true,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    hintText: 'Amount',
+                  ),
+                ),
+
+                kHeight10,
+
                 // Purpose
                 TextFormField(
                   controller: _purposeController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
                     hintText: 'Purpose',
-                  ),
-                ),
-
-                kHeight10,
-
-                // Amount
-                TextFormField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    hintText: 'Amount',
                   ),
                 ),
 
@@ -189,7 +190,7 @@ class _NewOrUpdateTransactionPageState
                               DateTime.now().subtract(const Duration(days: 30)),
                           lastDate: DateTime.now())
                       .then((value) {
-                    if (value != null) {
+                    if (value != null && context.mounted) {
                       context
                           .read<NewOrUpdateTransactionCubit>()
                           .valueChanged(date: value);

@@ -97,7 +97,7 @@ class _StatisticsPage extends StatelessWidget {
                   firstDate: DateTime(2020),
                   lastDate: DateTime.now().add(const Duration(days: 7)),
                 ).then((picked) {
-                  if (picked != null) {
+                  if (picked != null && context.mounted) {
                     context
                         .read<TransactionsCubit>()
                         .getAllTransactions(refresh: true, range: picked);

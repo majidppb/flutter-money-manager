@@ -29,7 +29,13 @@ class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
   Future<void> getValues() async {
     // If [_id] is null: New transaction
     if (id == null) {
-      emit(const Loaded());
+      // Default values: Today's date and Category as expense.
+      emit(Loaded(
+        date: DateTime.now(),
+      ));
+      valueChanged(
+        type: CategoryType.expense,
+      );
     } else {
       final result = await _getTransaction.call(GetTransactionParams(id: id!));
 

@@ -45,7 +45,7 @@ class _NavBarPageState extends State<NavBarPage> {
         .push<bool>(MaterialPageRoute(
             builder: (context) => NewOrUpdateTransactionProvider(id: id)))
         .then((isRefreshNeeded) {
-      if (isRefreshNeeded == true) {
+      if (isRefreshNeeded == true && context.mounted) {
         context.read<TransactionsCubit>().getAllTransactions(refresh: true);
       }
     });

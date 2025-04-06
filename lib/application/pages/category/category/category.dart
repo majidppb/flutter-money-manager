@@ -94,7 +94,7 @@ class _CategoryPage extends StatelessWidget {
         .push<bool>(MaterialPageRoute(
             builder: (context) => NewOrUpdateCategoryProvider(id: id)))
         .then((isRefreshNeeded) {
-      if (isRefreshNeeded == true) {
+      if (isRefreshNeeded == true && context.mounted) {
         context.read<CategoryCubit>().getAllCategories();
       }
     });
