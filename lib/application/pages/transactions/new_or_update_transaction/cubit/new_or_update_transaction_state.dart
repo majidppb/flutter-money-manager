@@ -10,7 +10,7 @@ class NewOrUpdateTransactionState with _$NewOrUpdateTransactionState {
     @Default(NewOrUpdateStatus.editing) final NewOrUpdateStatus status,
     final String? purpose,
     final double? amount,
-    final DateTime? date,
+    required final DateTime date,
     final CategoryType? type,
     final Category? category,
     @Default([]) final List<Category> categories,

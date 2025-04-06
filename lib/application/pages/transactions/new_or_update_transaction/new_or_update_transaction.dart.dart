@@ -51,7 +51,14 @@ class _NewOrUpdateTransactionPageState
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text('Transaction')),
+      appBar: AppBar(
+        title: Text(
+          context.read<NewOrUpdateTransactionCubit>().id == null
+              ? 'New Transaction'
+              : 'Update Transaction',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
       body: SafeArea(
         top: false,
         minimum: kScaffoldHPadding,
@@ -78,16 +85,6 @@ class _NewOrUpdateTransactionPageState
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
-                Text(
-                  context.read<NewOrUpdateTransactionCubit>().id == null
-                      ? 'New Transaction'
-                      : 'Update Transaction',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-
-                kHeight30,
-
                 // Amount
                 TextFormField(
                   controller: _amountController,
@@ -198,39 +195,26 @@ class _NewOrUpdateTransactionPageState
                   }),
                   icon: const Icon(Icons.calendar_today),
                   label: BlocSelector<NewOrUpdateTransactionCubit,
-                      NewOrUpdateTransactionState, DateTime?>(
+                      NewOrUpdateTransactionState, DateTime>(
                     selector: (state) => (state as Loaded).date,
-                    builder: (context, date) => Text(
-                      date == null
-                          ? 'Select Date'
-                          : DateFormat.yMMMd().format(date),
-                    ),
+                    builder: (context, date) =>
+                        Text(DateFormat.yMMMd().format(date)),
                   ),
                 ),
                 kHeight50,
-
-                // Submit
-                BlocListener<NewOrUpdateTransactionCubit,
-                    NewOrUpdateTransactionState>(
-                  listener: (context, state) =>
-                      (state as Loaded).status.snackBarNotify(context),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        onPressed: Navigator.of(context).pop,
-                        child: const Text('Cancel'),
-                      ),
-                      ElevatedButton(
-                        onPressed: _saveTransaction,
-                        child: const Text('Save'),
-                      ),
-                    ],
-                  ),
-                )
               ],
             );
           },
+        ),
+      ),
+      // Submit
+      floatingActionButton: BlocListener<NewOrUpdateTransactionCubit,
+          NewOrUpdateTransactionState>(
+        listener: (context, state) =>
+            (state as Loaded).status.snackBarNotify(context),
+        child: FloatingActionButton(
+          onPressed: _saveTransaction,
+          child: Icon(Icons.done),
         ),
       ),
     );

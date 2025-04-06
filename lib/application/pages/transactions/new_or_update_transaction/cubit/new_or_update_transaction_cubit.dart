@@ -95,7 +95,6 @@ class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
     if (purpose != null &&
         purpose.isNotEmpty &&
         amount != null &&
-        (state as Loaded).date != null &&
         (state as Loaded).type != null &&
         (state as Loaded).category != null) {
       emit(
@@ -106,7 +105,7 @@ class NewOrUpdateTransactionCubit extends Cubit<NewOrUpdateTransactionState> {
         id: id,
         purpose: purpose,
         amount: amount,
-        date: (state as Loaded).date!,
+        date: (state as Loaded).date,
         category: (state as Loaded).category!,
       ));
 

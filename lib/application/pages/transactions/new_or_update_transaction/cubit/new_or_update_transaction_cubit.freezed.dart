@@ -24,7 +24,7 @@ mixin _$NewOrUpdateTransactionState {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)
@@ -39,7 +39,7 @@ mixin _$NewOrUpdateTransactionState {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -54,7 +54,7 @@ mixin _$NewOrUpdateTransactionState {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -151,7 +151,7 @@ class _$LoadingImpl implements Loading {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)
@@ -169,7 +169,7 @@ class _$LoadingImpl implements Loading {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -187,7 +187,7 @@ class _$LoadingImpl implements Loading {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -283,7 +283,7 @@ class _$ErrorImpl implements Error {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)
@@ -301,7 +301,7 @@ class _$ErrorImpl implements Error {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -319,7 +319,7 @@ class _$ErrorImpl implements Error {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -381,7 +381,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
       {NewOrUpdateStatus status,
       String? purpose,
       double? amount,
-      DateTime? date,
+      DateTime date,
       CategoryType? type,
       Category? category,
       List<Category> categories});
@@ -422,7 +422,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -446,7 +446,7 @@ class _$LoadedImpl implements Loaded {
       {this.status = NewOrUpdateStatus.editing,
       this.purpose,
       this.amount,
-      this.date,
+      required this.date,
       this.type,
       this.category,
       final List<Category> categories = const []})
@@ -460,7 +460,7 @@ class _$LoadedImpl implements Loaded {
   @override
   final double? amount;
   @override
-  final DateTime? date;
+  final DateTime date;
   @override
   final CategoryType? type;
   @override
@@ -514,7 +514,7 @@ class _$LoadedImpl implements Loaded {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)
@@ -532,7 +532,7 @@ class _$LoadedImpl implements Loaded {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -551,7 +551,7 @@ class _$LoadedImpl implements Loaded {
             NewOrUpdateStatus status,
             String? purpose,
             double? amount,
-            DateTime? date,
+            DateTime date,
             CategoryType? type,
             Category? category,
             List<Category> categories)?
@@ -600,19 +600,20 @@ class _$LoadedImpl implements Loaded {
 }
 
 abstract class Loaded implements NewOrUpdateTransactionState {
-  const factory Loaded(
-      {final NewOrUpdateStatus status,
-      final String? purpose,
-      final double? amount,
-      final DateTime? date,
-      final CategoryType? type,
-      final Category? category,
-      final List<Category> categories}) = _$LoadedImpl;
+  const factory Loaded({
+    final NewOrUpdateStatus status,
+    final String? purpose,
+    final double? amount,
+    required final DateTime date,
+    final CategoryType? type,
+    final Category? category,
+    final List<Category> categories,
+  }) = _$LoadedImpl;
 
   NewOrUpdateStatus get status;
   String? get purpose;
   double? get amount;
-  DateTime? get date;
+  DateTime get date;
   CategoryType? get type;
   Category? get category;
   List<Category> get categories;
