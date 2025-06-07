@@ -72,6 +72,8 @@ class _BarChart extends StatelessWidget {
     double width = 15,
     List<int> showTooltips = const [],
   }) {
+    final toY = _items.last.percentage + 5;
+
     return BarChartGroupData(
       x: x,
       barRods: [
@@ -81,7 +83,7 @@ class _BarChart extends StatelessWidget {
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: 100,
+            toY: toY < 100 ? toY : 100,
             color: Theme.of(context).colorScheme.onSecondary,
           ),
         ),
